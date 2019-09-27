@@ -1,6 +1,8 @@
 {
   "name": "RayCalc2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "3eae5fb4"
 }
