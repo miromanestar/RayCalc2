@@ -13,7 +13,7 @@
             <ion-card-title>SSD Calculation</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-button expand="block">Calculate</ion-button>
+            <ion-button expand="block" (click)="goToInputPage()">Calculate</ion-button>
         </ion-card-content>
     </ion-card>
     <ion-card class="select-sad">
@@ -41,7 +41,7 @@
             <ion-icon slot="start" color="medium" name="send"></ion-icon>
             <ion-label>Request a Feature</ion-label>
         </ion-item>
-        <ion-item (click)="presentModal()" href="">
+        <ion-item (click)="presentModal()" button="true">
             <ion-icon slot="start" color="medium" name="settings"></ion-icon>
             <ion-label>Settings</ion-label>
         </ion-item>

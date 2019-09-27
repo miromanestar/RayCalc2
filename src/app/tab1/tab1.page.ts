@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
+import { InputPagePage } from '../input-page/input-page.page';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,9 @@ import { SettingsPage } from '../settings/settings.page';
 })
 export class Tab1Page {
 
-  constructor(public modalController : ModalController) {
+  inputPage : InputPagePage;
+
+  constructor(public navCtrl: NavController, public modalController : ModalController) {
 
   }
 
@@ -18,5 +21,9 @@ export class Tab1Page {
       component: SettingsPage
     });
     return await modal.present();
+  }
+
+  goToInputPage() {
+    this.navCtrl.push(inputPage);
   }
 }
