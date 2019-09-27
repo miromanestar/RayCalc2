@@ -10,8 +10,6 @@ import { InputPagePage } from '../input-page/input-page.page';
 })
 export class Tab1Page {
 
-  inputPage : InputPagePage;
-
   constructor(public navCtrl: NavController, public modalController : ModalController) {
 
   }
@@ -23,7 +21,7 @@ export class Tab1Page {
     return await modal.present();
   }
 
-  goToInputPage() {
-    this.navCtrl.push(inputPage);
+  goToInputPage(calcType: String) {
+    this.navCtrl.navigateForward('/input-page', ); //this.router.navigateByURL() via angular to pass data... figure out later
   }
 }
