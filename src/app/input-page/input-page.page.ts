@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-input-page',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputPagePage implements OnInit {
 
-  constructor() { }
+  WhichSelected = "ERROR";
+  public calcSelect = "";
+  constructor(private router : Router) { 
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation.extras.state as { selectCalc: string };
+    this.setTitle(state);
+  }
+
+  private setTitle(state: { selectCalc: string; }) {
+    if(state.selectCalc == 'ssd') { this.WhichSelected = 'SSD Calculation'}
+    if(state.selectCalc =='sad') { this.WhichSelected = "SAD Calculation"}
+    this.calcSelect = state.selectCalc;
+  }
 
   ngOnInit() {
   }

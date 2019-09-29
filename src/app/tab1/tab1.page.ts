@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
 import { InputPagePage } from '../input-page/input-page.page';
 
@@ -10,7 +11,7 @@ import { InputPagePage } from '../input-page/input-page.page';
 })
 export class Tab1Page {
 
-  constructor(public navCtrl: NavController, public modalController : ModalController) {
+  constructor(public router: Router, public modalController : ModalController) {
 
   }
 
@@ -22,6 +23,7 @@ export class Tab1Page {
   }
 
   goToInputPage(calcType: String) {
-    this.navCtrl.navigateForward('/input-page', ); //this.router.navigateByURL() via angular to pass data... figure out later
+    const navigationExtras : NavigationExtras = { state: { selectCalc: calcType }};
+    this.router.navigate(['/input-page'], navigationExtras);
   }
 }
