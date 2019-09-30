@@ -26,6 +26,13 @@ export class ResultsPage implements OnInit {
   y2 = "";
   width = "";
   equivalentSqr = "";
+  inverseSqr = ""; //STILL NEEDS TO BE IMPLEMENTED
+
+  //Declare calculated variables
+  mus= "";
+  scp = "";
+  pdd = "";
+  dpf = "";
 
   constructor(public router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -62,7 +69,7 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.calcSelect = "ssd") { this.calcTitle = "Source-Skin-Distance Calculation" }
+    if(this.calcSelect = "ssd") { this.calcTitle = "Source-Surface-Distance Calculation" }
     if(this.calcSelect = "sad") { this.calcTitle = "Source-Axis-Distance Calculation" }
    }
 
