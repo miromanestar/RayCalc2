@@ -134,7 +134,24 @@ export class InputPagePage implements OnInit {
 
   calculatePressed() {
     if((this.length != "" && this.width != "" && this.script != "" && this.fieldSelect != "" &&(this.depth != "" && (Number(this.depth) <= 30 && Number(this.depth) >= 0.5)) && this.energySelect != "" && this.fieldSelect != "Required" && this.ssd != "" && (Number(this.equivalentSqr) <= 30 && Number(this.equivalentSqr) >= 5)) && (this.length != "Required" && this.width != "Required" && this.script != "Required" && (this.depth != "Required" && this.depth != "Too large" && this.depth != "Too small") && this.energySelect != "Required" && this.ssd != "Required" && (this.equivalentSqr != "Value too large" && this.equivalentSqr != "Value too small"))) {
-      const navigationExtras : NavigationExtras = { state: { selectCalc: this.calcSelect }}; //FINISH IMPLEMENTING
+      const navigationExtras : NavigationExtras = { state: 
+        { selectCalc: this.calcSelect,
+          identifier: this.identifier,
+          treatSite: this.treatSite,
+          fieldSelect: this.fieldSelect,
+          energySelect: this.energySelect,
+          script: this.script,
+          ssd: this.ssd,
+          depth: this.depth,
+          x1: this.x1,
+          x2: this.x2,
+          length: this.length,
+          y1: this.y1,
+          y2: this.y2,
+          width: this.width,
+          equivalentSqr: this.equivalentSqr
+        }
+      };
       this.router.navigate(['/results'], navigationExtras);
     } else {
       if(this.script == "") { this.script = "Required"; this.scriptStyle = { 'color': 'red'}}

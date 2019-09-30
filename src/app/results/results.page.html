@@ -6,5 +6,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+        <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
+        <ion-card-title>Identifier: {{ identifier }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <p>Energy Level: {{ energySelect + " MV " + fieldSelect }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
