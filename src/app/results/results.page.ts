@@ -37,8 +37,8 @@ export class ResultsPage implements OnInit {
   dpf = "";
 
   //Declare misc variables
-  date = "Date not implemented";
-  name = "Not implemented";
+  date = "Error: Cannot grab date";
+  name = "Error: No value found";
 
   constructor(public router: Router) {
     const navigation = this.router.getCurrentNavigation();
