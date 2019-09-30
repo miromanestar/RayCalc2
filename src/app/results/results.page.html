@@ -24,7 +24,6 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <img src="{{ calcFormula }}" alt="" />
     <ion-card-header>
         <ion-card-title>Result: {{ mus + "MU's" }}</ion-card-title>
     </ion-card-header>
@@ -33,6 +32,7 @@
         <p>SCP: {{ scp }}</p>
         <p>{{ PDDTPR }}</p>
     </ion-card-content>
+    <img class="formula-img" src="{{ calcFormula }}" alt="" />
   </ion-card>
   <p style="text-align: center;">Calculated by: {{ name }}</p>
   <p style="text-align:center;">{{ date }}</p>

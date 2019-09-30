@@ -59,6 +59,11 @@ export class ResultsPage implements OnInit {
       width: string,
       equivalentSqr: string
     };
+
+    //Date
+    let today = new Date();
+    this.date = (today.getMonth()+1) + " " + today.getDate() + ", " + today.getFullYear() + " at " + today.getHours() + ":" + today.getMinutes()
+
     this.identifier = state.identifier
     this.treatSite = state.treatSite
     this.calcSelect = state.calcSelect
@@ -75,7 +80,7 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: Not Implemented"; this.calcFormula = "/assets/shapes.svg" }
+    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: Not Implemented"; this.calcFormula = "/assets/ssdFormulaCalc.svg" }
     if(this.calcSelect == "sad") { this.calcTitle = "Source-Axis-Distance Calculation"; this.PDDTPR = "TPR: Not Implemented"; this.calcFormula = "/assets/sadCalcFormula.svg" }
 
     if(this.calcSelect == "sad") {
