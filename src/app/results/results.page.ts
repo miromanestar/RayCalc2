@@ -62,7 +62,13 @@ export class ResultsPage implements OnInit {
 
     //Date
     let today = new Date();
-    this.date = (today.getMonth()+1) + " " + today.getDate() + ", " + today.getFullYear() + " at " + today.getHours() + ":" + today.getMinutes()
+    let hour: any;
+    let ampm: string;
+    if(today.getHours() > 12) {
+      hour = today.getHours() - 12;
+      ampm = "PM";
+    } else { ampm = "AM"}
+    this.date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + " at " + hour + ":" + today.getMinutes() + " " + ampm;
 
     this.identifier = state.identifier
     this.treatSite = state.treatSite
