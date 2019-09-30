@@ -42,14 +42,14 @@
             <ion-col style="padding-left:0px !important; padding-right: 0px !important;">
                 <ion-item>
                     <ion-label position="stacked" class="input-label">SSD</ion-label>
-                    <ion-input [ngStyle]="ssdStyle" [(ngModel)]="ssd" (ionFocus)="resetInputs('ssd')" placeholder="80, 100" inputmode="decimal" readonly="true" required="true"></ion-input>
+                    <ion-input readonly="{{ disableSSD }}" [ngStyle]="ssdStyle" [(ngModel)]="ssd"  (ngModelChange)="changeISO('ssd')" (ionFocus)="resetInputs('ssd')" placeholder="80, 100" inputmode="decimal" readonly="true" required="true"></ion-input>
                 </ion-item>
             </ion-col>
             <!-- Depth Column -->
             <ion-col>
                 <ion-item>
                     <ion-label position="stacked" class="input-label">Depth</ion-label>
-                    <ion-input [ngStyle]="depthStyle" [(ngModel)]="depth" (ionFocus)="resetInputs('depth')" placeholder="Depth" inputmode="decimal" required="true"></ion-input>
+                    <ion-input [ngStyle]="depthStyle" [(ngModel)]="depth"  (ngModelChange)="changeISO('depth')" (ionFocus)="resetInputs('depth')" placeholder="Depth" inputmode="decimal" required="true"></ion-input>
                 </ion-item>
             </ion-col>
             <!-- Energy Column -->

@@ -23,7 +23,7 @@ export class Tab1Page {
   }
 
   goToInputPage(calcType: String) {
-    const navigationExtras : NavigationExtras = { state: { selectCalc: calcType }};
+    const navigationExtras : NavigationExtras = { state: { calcSelect: calcType }};
     this.router.navigate(['/input-page'], navigationExtras);
   }
 }

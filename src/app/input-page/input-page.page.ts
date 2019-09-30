@@ -44,18 +44,20 @@ export class InputPagePage implements OnInit {
   width = "";
   equivalentSqr = "";
 
+  //Enable/disable SSD
+  disableSSD = "false";
+
   constructor(public router : Router, private pickerCtrl : PickerController) { 
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation.extras.state as { selectCalc: string };
+    const state = navigation.extras.state as { calcSelect: string };
     this.setCalcType(state);
-    this.ssd = "100";
   }
 
   //Also will set the variable for calcSelect to be used to determine properties of different input fields, important for the different calculation types.
-  private setCalcType(state: { selectCalc: string; }) {
-    if(state.selectCalc == 'ssd') { this.WhichSelected = 'SSD Calculation'; this.fieldSelect = 'Single';}
-    if(state.selectCalc =='sad') { this.WhichSelected = "SAD Calculation"}
-    this.calcSelect = state.selectCalc;
+  private setCalcType(state: { calcSelect: string; }) {
+    if(state.calcSelect == 'ssd') { this.WhichSelected = 'SSD Calculation'; this.fieldSelect = 'Single'; this.ssd = "100"; this.disableSSD = "true"; }
+    if(state.calcSelect =='sad') { this.WhichSelected = "SAD Calculation"}
+    this.calcSelect = state.calcSelect;
   }
 
   //Picker selection, takes string input to determine which values to display
@@ -85,6 +87,15 @@ export class InputPagePage implements OnInit {
         if (selection == "energy") { this.energySelect = col.options[col.selectedIndex].value; }
       }
       });
+    }
+  }
+
+  changeISO(selection: string) {
+    if(this.calcSelect == "sad") {
+      var depthn = Number(this.depth);
+      var ssdn = Number(this.ssd);
+      if(selection == "depth") { this.ssd = String(100 - depthn) }
+      if(selection == "ssd") { this.depth = String(100 - ssdn) }
     }
   }
 
@@ -135,7 +146,7 @@ export class InputPagePage implements OnInit {
   calculatePressed() {
     if((this.length != "" && this.width != "" && this.script != "" && this.fieldSelect != "" &&(this.depth != "" && (Number(this.depth) <= 30 && Number(this.depth) >= 0.5)) && this.energySelect != "" && this.fieldSelect != "Required" && this.ssd != "" && (Number(this.equivalentSqr) <= 30 && Number(this.equivalentSqr) >= 5)) && (this.length != "Required" && this.width != "Required" && this.script != "Required" && (this.depth != "Required" && this.depth != "Too large" && this.depth != "Too small") && this.energySelect != "Required" && this.ssd != "Required" && (this.equivalentSqr != "Value too large" && this.equivalentSqr != "Value too small"))) {
       const navigationExtras : NavigationExtras = { state: 
-        { selectCalc: this.calcSelect,
+        { calcSelect: this.calcSelect,
           identifier: this.identifier,
           treatSite: this.treatSite,
           fieldSelect: this.fieldSelect,
@@ -156,7 +167,7 @@ export class InputPagePage implements OnInit {
     } else {
       if(this.script == "") { this.script = "Required"; this.scriptStyle = { 'color': 'red'}}
       if(this.depth == "") { this.depth = "Required"; this.depthStyle = { 'color': 'red'}}
-      if(Number(this.depth) > 30) { this.depth = "Too lage"; this.depthStyle = { 'color': 'red'}}
+      if(Number(this.depth) > 30) { this.depth = "Too large"; this.depthStyle = { 'color': 'red'}}
       if(Number(this.depth) < 0.5) { this.depth = "Too small"; this.depthStyle = { 'color': 'red'}}
       if(this.length == "") { this.length = "Required"; this.lengthStyle = { 'color': 'red'}}
       if(this.width == "") { this.width = "Required"; this.widthStyle = { 'color': 'red'}}

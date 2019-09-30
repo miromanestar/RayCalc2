@@ -8,8 +8,8 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-        <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
         <ion-card-title>Identifier: {{ identifier }}</ion-card-title>
+        <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
         <p>Energy Level: {{ energySelect + "MV " }}</p>
@@ -24,12 +24,16 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
+    <img src="{{ calcFormula }}" alt="" />
     <ion-card-header>
-        <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
-        <ion-card-title>Identifier: {{ identifier }}</ion-card-title>
+        <ion-card-title>Result: {{ mus + "MU's" }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-        <p>Energy Level: {{ energySelect + "MV " }}</p>
+        <p>Dose Per Field: {{ script }}</p>
+        <p>SCP: {{ scp }}</p>
+        <p>{{ PDDTPR }}</p>
     </ion-card-content>
   </ion-card>
+  <p style="text-align: center;">Calculated by: {{ name }}</p>
+  <p style="text-align:center;">{{ date }}</p>
 </ion-content>

@@ -9,6 +9,8 @@ import { Router, NavigationExtras } from '@angular/router';
 export class ResultsPage implements OnInit {
 
   calcTitle = "";
+  PDDTPR = "";
+  calcFormula = "";
 
   //Declare input variables
   identifier = "";
@@ -34,10 +36,14 @@ export class ResultsPage implements OnInit {
   pdd = "";
   dpf = "";
 
+  //Declare misc variables
+  date = "Date not implemented";
+  name = "Not implemented";
+
   constructor(public router: Router) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as { 
-      selectCalc: string,
+      calcSelect: string,
       identifier: string,
       treatSite: string,
       fieldSelect: string,
@@ -55,7 +61,7 @@ export class ResultsPage implements OnInit {
     };
     this.identifier = state.identifier
     this.treatSite = state.treatSite
-    this.calcSelect = state.selectCalc
+    this.calcSelect = state.calcSelect
     this.fieldSelect = state.fieldSelect
     this.energySelect = state.energySelect
     this.script = state.script
@@ -69,8 +75,22 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.calcSelect = "ssd") { this.calcTitle = "Source-Surface-Distance Calculation" }
-    if(this.calcSelect = "sad") { this.calcTitle = "Source-Axis-Distance Calculation" }
+    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: Not Implemented"; this.calcFormula = "/assets/shapes.svg" }
+    if(this.calcSelect == "sad") { this.calcTitle = "Source-Axis-Distance Calculation"; this.PDDTPR = "TPR: Not Implemented"; this.calcFormula = "/assets/sadCalcFormula.svg" }
+
+    if(this.calcSelect == "sad") {
+      switch (this.energySelect) {
+        case ("6"): this.inverseSqr = String(1.0323); break;
+        case ("10"): this.inverseSqr = String(1.0445); break;
+        //case ("15"): this.inverseSqr = String(0.0); break; To be implemented
+        case ("18"): this.inverseSqr = String(1.0671); break;
+        default: "ERROR: Inverse Square Factor not found";
+      }
+    }
+
+    if(this.calcSelect == "ssd") {
+      this.inverseSqr = "Not Applicable"
+    }
    }
 
   ngOnInit() {
