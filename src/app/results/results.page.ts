@@ -226,7 +226,121 @@ export class ResultsPage implements OnInit {
         }
       }
     } else { //Interpolate for both
-      
+
+      //Interpolate if both values only have to interpolate once
+      let tempYIndex = yAxis.indexOf(this.trunc(depthn))
+      let tempXIndex = xAxis.indexOf(this.trunc(sqr))
+      if(tempYIndex != -1 && tempXIndex != -1 && Number(xAxis[tempXIndex + 1]) - Number(xAxis[tempXIndex]) == 1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) {
+        let tempVal = lines[tempYIndex + 1].split(',');
+        let tempVal2 = lines[tempYIndex + 2].split(',');
+        let tempVal3 = Number(tempVal[tempXIndex + 1]) //Grab equivalent sqr
+        let tempVal4 = Number(tempVal2[tempXIndex + 1]) //
+        let tempVal5 = Number(tempVal[tempXIndex + 2]) //
+        let tempVal6 = Number(tempVal2[tempXIndex + 2]) //
+        return (tempVal3 + tempVal4 + tempVal5 + tempVal6)/4
+      } else { //One or both values must interpolate twice... this is going to be really annoying to code
+
+        //Determine index of needed yAxis data
+        let tempYIndex = yAxis.indexOf(depthn)
+        let yPos = 0
+        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-0.5); yPos = 0.5 }
+        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-1); yPos = 1 }
+        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-1.5); yPos = 1.5 }
+
+        //Determine index of needed xAxis data
+        let tempXIndex = xAxis.indexOf(sqr)
+        let xPos = 0
+        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-0.5); xPos = 0.5 }
+        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-1); xPos = 1 }
+        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-1.5); xPos = 1.5 }
+
+        //Now grab the data
+        let tempArr1 = lines[tempYIndex + 1].split(',')
+        let tempArr2 = lines[tempYIndex + 2].split(',')
+
+        /*Layout of data:
+            
+            tempVal   tempVal2
+            tempVal3  tempVal4
+        */
+        let tempVal = Number(tempArr1[tempXIndex + 1])
+        let tempVal2 = Number(tempArr1[tempXIndex + 2])
+        let tempVal3 = Number(tempArr2[tempXIndex + 1])
+        let tempVal4 = Number(tempArr2[tempXIndex + 2])
+
+        /* Interpolation layout:
+            10    10.5    11    11.5    12
+        10  tempVal       top           tempVal2
+        10.5
+        11  left          center        right
+        11.5
+        12  tempVal3      bottom        tempVal4
+        */
+        let center = (tempVal + tempVal2 + tempVal3 + tempVal4)/4
+        let left = (tempVal + tempVal3)/2
+        let right = (tempVal2 + tempVal4)/2
+        let top = (tempVal + tempVal2)/2
+        let bottom = (tempVal3 + tempVal4)/2
+
+        //Now interpolate given certain conditions
+        if(xPos = 0) {
+          if(yPos = 0.5) {
+            return (tempVal + left)/2
+          }
+          if(yPos = 1) {
+            return left
+          }
+          if(yPos = 1.5) {
+            return (left + tempVal3)/2
+          }
+        }
+        if(xPos = 0.5) {
+          if(yPos = 0) {
+            return (tempVal + top)/2
+          }
+          if(yPos = 0.5) {
+            return (tempVal + top + center+ left)/4
+          }
+          if(yPos = 1) {
+            return (left + center)/2
+          }
+          if(yPos = 1.5) {
+            return (tempVal3 + left + center + bottom)/4
+          }
+        }
+
+        if(xPos = 1) {
+          if(yPos = 0) {
+            return top
+          }
+          if(yPos = 0.5) {
+            return (top + center)/2
+          }
+          if(yPos = 1) {
+            return center
+          }
+          if(yPos = 1.5) {
+            return (center + bottom)/2
+          }
+        }
+
+        if(xPos = 1.5) {
+          if(yPos = 0) {
+            return (top + tempVal2)/2
+          }
+          if(yPos = 0.5) {
+            return (top + center + tempVal2 + right)/4
+          }
+          if(yPos = 1) {
+            return (center + right)/2
+          }
+          if(yPos = 1.5) {
+            return (center + right + bottom + tempVal4)/2
+          }
+        }
+
+        //Phew... there's probably a much better way to do this...
+      }
     }
 
     return 0
