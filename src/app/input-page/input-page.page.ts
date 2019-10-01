@@ -127,7 +127,7 @@ export class InputPagePage implements OnInit {
     this.equivalentSquare();
   }
 
-  equivalentSquare() {
+  equivalentSquare() { //Will ensure the value will always go to the nearest half
     if(this.equivalentSqr == "Value too small" || this.equivalentSqr == "Value too large") {
       this.equivalentSqr = "";
       this.equivalentSqrStyle = { 'color': 'inherit'}
@@ -137,7 +137,7 @@ export class InputPagePage implements OnInit {
     var widthn = Number(this.width);
     var result = String((2 * lengthn * widthn)/(lengthn + widthn));
     if(result != "NaN" && widthn != 0 && lengthn != 0) {
-      this.equivalentSqr = String(Number((Number(result) * 2).toFixed())/2) //Round to the nearest half
+      this.equivalentSqr = String(Number((Number(result) * 2).toFixed())/2)
     } else {
       this.equivalentSqr = "";
     }

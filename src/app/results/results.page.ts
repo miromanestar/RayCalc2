@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { sixMVSCP, tenMVSCP, eightMVSCP, sixMVPDD, tenMVPDD, eightMVPDD, sixMVTPR, tenMVTPR, eightMVTPR } from '../tables/legacy/legacy-tables'
 
 @Component({
   selector: 'app-results',
@@ -33,7 +34,6 @@ export class ResultsPage implements OnInit {
   //Declare calculated variables
   mus= "";
   scp = "";
-  pdd = "";
   dpf = "";
 
   //Declare misc variables
@@ -59,8 +59,11 @@ export class ResultsPage implements OnInit {
       width: string,
       equivalentSqr: string
     };
-
-    //Date
+    this.setValues(state);
+   }
+   
+   setValues(state: any) {
+     //Date
     let today = new Date();
     let hour: any;
     let ampm: string;
@@ -86,8 +89,8 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: Not Implemented"; this.calcFormula = "/assets/ssdFormulaCalc.svg" }
-    if(this.calcSelect == "sad") { this.calcTitle = "Source-Axis-Distance Calculation"; this.PDDTPR = "TPR: Not Implemented"; this.calcFormula = "/assets/sadCalcFormula.svg" }
+    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: " + this.calculatePDDTPR(); this.calcFormula = "/assets/ssdFormulaCalc.svg" }
+    if(this.calcSelect == "sad") { this.calcTitle = "Source-Axis-Distance Calculation"; this.PDDTPR = "TPR: " + this.calculatePDDTPR(); this.calcFormula = "/assets/sadCalcFormula.svg" }
 
     if(this.calcSelect == "sad") {
       switch (this.energySelect) {
@@ -102,7 +105,87 @@ export class ResultsPage implements OnInit {
     if(this.calcSelect == "ssd") {
       this.inverseSqr = "Not Applicable"
     }
+
+    //If 'opposed field' is chosen, use script divided by half
+    if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
+
+    this.scp = String(this.calculateSCP())
+   } //setValues end of method
+
+   calculateSCP(): number {
+     let lines: any;
+     if(this.energySelect == "6") { lines = sixMVSCP.split('\n') }
+     if(this.energySelect == "10") { lines = tenMVSCP.split('\n') }
+     if(this.energySelect == "18") { lines = eightMVSCP.split('\n') }
+
+     for (let i = 1; i < lines.length; i++) {
+      let columns = lines[i].split(',');
+      let fieldSize = Number(columns[0]);
+      let scp = Number(columns[1]);
+
+      if(fieldSize == Number(this.equivalentSqr)) { return scp; break; }
+     }
    }
+
+   calculatePDDTPR(): number {
+     let result = 0
+     let lines: any;
+     if(this.calcSelect == "ssd") {
+      if(this.energySelect == "6") { lines = sixMVPDD.split('\n') }
+      if(this.energySelect == "10") { lines = tenMVPDD.split('\n') }
+      if(this.energySelect == "18") { lines = eightMVPDD.split('\n') }
+     }
+     if(this.calcSelect == "sad") {
+      if(this.energySelect == "6") { lines = sixMVTPR.split('\n') }
+      if(this.energySelect == "10") { lines = tenMVTPR.split('\n') }
+      if(this.energySelect == "18") { lines = eightMVTPR.split('\n') }
+     }
+
+     //Grab the x and y axis
+     let tempXAxis = lines[0].split(','); tempXAxis.shift(); //Grabs the header and removes the first item which will always be "Depth"
+     let tempYAxis: string[] = ["filler"]
+     for(let i = 1; i < lines.length; i++) { //Grabs yAxis and appends it to to the end of the array
+       let yVal = lines[i].split(',')
+       tempYAxis.push(yVal[0])
+     }
+     tempYAxis.shift();
+
+    //Convert x and y axis to numbers
+    let xAxis = tempXAxis.map(Number);
+    let yAxis = tempYAxis.map(Number);
+    let sqr = Number(this.equivalentSqr)
+    let depthn = Number(this.depth)
+    //Determine if interpolation is needed
+    let xIndex = xAxis.indexOf(sqr)
+    let yIndex = yAxis.indexOf(depthn)
+    if(xIndex != -1 && yIndex != -1) { //If no interpolation is needed, simply grab the value by itself
+      let tempVal = lines[yIndex + 1].split(',')
+      result = tempVal[xIndex + 1]
+    } else if(xIndex != -1 && yIndex == -1) { //Interpolate for depth, grab equivalent square
+      let tempYIndex = yAxis.indexOf(this.trunc(depthn)) 
+      if(tempYIndex != -1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) {
+        let tempVal = lines[tempYIndex + 1].split(',')
+        let tempVal2 = lines[tempYIndex + 2].split(',')
+        result = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
+      } else {
+        tempYIndex = yAxis.indexOf(this.trunc(depthn-1))
+
+      }
+    } else if(xIndex == -1 && yIndex != -1) { //Interpolate for equivalent square, grab depth
+
+    } else { //Interpolate for both
+
+    }
+
+    return result
+   }
+
+   trunc(num: number): number {
+     let temp = String(num)
+     let index = temp.indexOf('.')
+     return Number(temp.substring(0, index))
+   }
+
 
   ngOnInit() {
   }
