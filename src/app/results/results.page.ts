@@ -103,14 +103,14 @@ export class ResultsPage implements OnInit {
 
     if(this.calcSelect == "ssd") { 
       this.calcTitle = "Source-Surface-Distance Calculation"; 
-      this.PDDTPR = "PDD: " +  pddtpr
+      this.PDDTPR = "PDD: " +  pddtpr.toFixed(3)
       this.calcFormula = "/assets/ssdFormulaCalc.svg"
       this.mus =(scriptn/(scpn * pddtpr)).toFixed()
     }
 
     if(this.calcSelect == "sad") { 
       this.calcTitle = "Source-Axis-Distance Calculation"; 
-      this.PDDTPR = "TPR: " + pddtpr
+      this.PDDTPR = "TPR: " + pddtpr.toFixed(3)
       this.calcFormula = "/assets/sadCalcFormula.svg" 
       this.mus = (scriptn/(scpn * pddtpr * inverseSqrn)).toFixed()
     }
