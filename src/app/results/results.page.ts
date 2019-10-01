@@ -64,7 +64,8 @@ export class ResultsPage implements OnInit {
    }
    
    setValues(state: any) {
-     //Date
+    
+    //Date
     let today = new Date();
     let hour: any;
     let ampm: string;
@@ -90,18 +91,30 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.identifier = "") { this.identifier = "None" }
+    if(this.identifier == "") { this.identifier = "None" }
     //If 'opposed field' is chosen, use script divided by half
     if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
 
     this.scp = String(this.calculateSCP())
+
+    if(this.calcSelect == "sad") {
+      switch (this.energySelect) {
+        case ("6"): this.inverseSqr = "1.0323"; break;
+        case ("10"): this.inverseSqr = "1.0445"; break;
+        //case ("15"): this.inverseSqr = String(0.0); break; To be implemented
+        case ("18"): this.inverseSqr = "1.0671"; break;
+        default: "ERROR";
+      }
+    } else if(this.calcSelect == "ssd") {
+      this.inverseSqr = "Not Applicable"
+    }
 
     //Convert to numbers because I'm dyslexic
     let scriptn = Number(this.script)
     let scpn = Number(this.scp)
     let pddtpr = Number(this.calculatePDDTPR());
     let inverseSqrn = Number(this.inverseSqr)
-
+ 
     if(this.calcSelect == "ssd") { 
       this.calcTitle = "Source-Surface-Distance Calculation"; 
       this.PDDTPR = "PDD: " +  pddtpr.toFixed(3)
@@ -116,19 +129,6 @@ export class ResultsPage implements OnInit {
       this.mus = (scriptn/(scpn * pddtpr * inverseSqrn)).toFixed()
     }
 
-    if(this.calcSelect == "sad") {
-      switch (this.energySelect) {
-        case ("6"): this.inverseSqr = String(1.0323); break;
-        case ("10"): this.inverseSqr = String(1.0445); break;
-        //case ("15"): this.inverseSqr = String(0.0); break; To be implemented
-        case ("18"): this.inverseSqr = String(1.0671); break;
-        default: "ERROR: Inverse Square Factor not found";
-      }
-    }
-
-    if(this.calcSelect == "ssd") {
-      this.inverseSqr = "Not Applicable"
-    }
    } //setValues end of method
 
    calculateSCP(): number {

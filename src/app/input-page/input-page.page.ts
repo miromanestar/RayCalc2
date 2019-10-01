@@ -96,6 +96,8 @@ export class InputPagePage implements OnInit {
       var ssdn = Number(this.ssd);
       if(selection == "depth") { this.ssd = String(100 - depthn) }
       if(selection == "ssd") { this.depth = String(100 - ssdn) }
+      this.depthStyle = { 'color': 'inherit' }
+      this.ssdStyle = { 'color': 'inherit' }
     }
   }
 
