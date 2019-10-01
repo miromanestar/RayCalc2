@@ -163,12 +163,12 @@ export class ResultsPage implements OnInit {
       result = tempVal[xIndex + 1]
     } else if(xIndex != -1 && yIndex == -1) { //Interpolate for depth, grab equivalent square
       let tempYIndex = yAxis.indexOf(this.trunc(depthn)) 
-      if(tempYIndex != -1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) {
+      if(tempYIndex != -1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) { //This is only to interpolate once
         let tempVal = lines[tempYIndex + 1].split(',')
         let tempVal2 = lines[tempYIndex + 2].split(',')
         result = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
-      } else {
-        tempYIndex = yAxis.indexOf(this.trunc(depthn-1))
+      } else { //Need to interpolate twice
+        //Implement this tomorrow
 
       }
     } else if(xIndex == -1 && yIndex != -1) { //Interpolate for equivalent square, grab depth
