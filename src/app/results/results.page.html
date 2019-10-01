@@ -1,39 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Results</ion-title>
-    <ion-back-button defaultHref="/" style="float: left;"></ion-back-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Results</ion-title>
+        <ion-back-button defaultHref="/" style="float: left;"></ion-back-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-        <ion-card-title>Identifier: {{ identifier }}</ion-card-title>
-        <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-        <p>Treatment Site: {{ treatSite }}</p>
-        <p>Energy Level: {{ energySelect + "MV " }}</p>
-        <p>Script: {{ script + "cGy "  + fieldSelect + " Field"}}</p>
-        <p>Inverse Square Factor: {{ inverseSqr }}</p>
-        <p>SSD: {{ ssd }}</p>
-        <p>Depth: {{ depth }}</p>
-        <p>Length: {{ length }}</p>
-        <p>Width: {{ width }}</p>
-        <p>Equivalent Square: {{ equivalentSqr }}</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-        <ion-card-title>Result: {{ mus + "MU's" }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <p>Dose Per Field: {{ script }}</p>
-        <p>SCP: {{ scp }}</p>
-        <p>{{ PDDTPR }}</p>
-    </ion-card-content>
-    <img class="formula-img" src="{{ calcFormula }}" alt="" />
-  </ion-card>
-  <p style="text-align: center;">Calculated by: {{ name }}</p>
-  <p style="text-align:center;">{{ date }}</p>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Identifier: {{ identifier }}</ion-card-title>
+            <ion-card-subtitle>{{ calcTitle }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Treatment Site: {{ treatSite }}</p>
+            <p>Energy Level: {{ energySelect + "MV " }}</p>
+            <p>Script: {{ script + "cGy " + fieldSelect + " Field"}}</p>
+            <p>Inverse Square Factor: {{ inverseSqr }}</p>
+            <p>SSD: {{ ssd }}</p>
+            <p>Depth: {{ depth }}</p>
+            <p>Length: {{ length }}</p>
+            <p>Width: {{ width }}</p>
+            <p>Equivalent Square: {{ equivalentSqr }}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Result: {{ mus + " mu's" }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Dose Per Field: {{ script }}</p>
+            <p>SCP: {{ scp }}</p>
+            <p>{{ PDDTPR }}</p>
+        </ion-card-content>
+        <img class="formula-img" src="{{ calcFormula }}" alt="" />
+    </ion-card>
+    <p style="text-align: center;">Calculated by: {{ name }}</p>
+    <p style="text-align:center;">{{ date }}</p>
 </ion-content>

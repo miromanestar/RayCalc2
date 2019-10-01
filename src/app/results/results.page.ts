@@ -90,8 +90,30 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
-    if(this.calcSelect == "ssd") { this.calcTitle = "Source-Surface-Distance Calculation"; this.PDDTPR = "PDD: " + this.calculatePDDTPR(); this.calcFormula = "/assets/ssdFormulaCalc.svg" }
-    if(this.calcSelect == "sad") { this.calcTitle = "Source-Axis-Distance Calculation"; this.PDDTPR = "TPR: " + this.calculatePDDTPR(); this.calcFormula = "/assets/sadCalcFormula.svg" }
+    //If 'opposed field' is chosen, use script divided by half
+    if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
+
+    this.scp = String(this.calculateSCP())
+
+    //Convert to numbers because I'm dyslexic
+    let scriptn = Number(this.script)
+    let scpn = Number(this.scp)
+    let pddtpr = Number(this.calculatePDDTPR());
+    let inverseSqrn = Number(this.inverseSqr)
+
+    if(this.calcSelect == "ssd") { 
+      this.calcTitle = "Source-Surface-Distance Calculation"; 
+      this.PDDTPR = "PDD: " +  pddtpr
+      this.calcFormula = "/assets/ssdFormulaCalc.svg"
+      this.mus =(scriptn/(scpn * pddtpr)).toFixed()
+    }
+
+    if(this.calcSelect == "sad") { 
+      this.calcTitle = "Source-Axis-Distance Calculation"; 
+      this.PDDTPR = "TPR: " + pddtpr
+      this.calcFormula = "/assets/sadCalcFormula.svg" 
+      this.mus = (scriptn/(scpn * pddtpr * inverseSqrn)).toFixed()
+    }
 
     if(this.calcSelect == "sad") {
       switch (this.energySelect) {
@@ -106,11 +128,6 @@ export class ResultsPage implements OnInit {
     if(this.calcSelect == "ssd") {
       this.inverseSqr = "Not Applicable"
     }
-
-    //If 'opposed field' is chosen, use script divided by half
-    if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
-
-    this.scp = String(this.calculateSCP())
    } //setValues end of method
 
    calculateSCP(): number {
@@ -243,16 +260,16 @@ export class ResultsPage implements OnInit {
         //Determine index of needed yAxis data
         let tempYIndex = yAxis.indexOf(depthn)
         let yPos = 0
-        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-0.5); yPos = 0.5 }
-        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-1); yPos = 1 }
-        if(tempYIndex = -1) { tempYIndex = yAxis.indexOf(depthn-1.5); yPos = 1.5 }
+        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-0.5); yPos = 0.5 }
+        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1); yPos = 1 }
+        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1.5); yPos = 1.5 }
 
         //Determine index of needed xAxis data
         let tempXIndex = xAxis.indexOf(sqr)
         let xPos = 0
-        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-0.5); xPos = 0.5 }
-        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-1); xPos = 1 }
-        if(tempXIndex = -1) { tempXIndex = xAxis.indexOf(sqr-1.5); xPos = 1.5 }
+        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-0.5); xPos = 0.5 }
+        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1); xPos = 1 }
+        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1.5); xPos = 1.5 }
 
         //Now grab the data
         let tempArr1 = lines[tempYIndex + 1].split(',')
@@ -283,59 +300,59 @@ export class ResultsPage implements OnInit {
         let bottom = (tempVal3 + tempVal4)/2
 
         //Now interpolate given certain conditions
-        if(xPos = 0) {
-          if(yPos = 0.5) {
+        if(xPos == 0) {
+          if(yPos == 0.5) {
             return (tempVal + left)/2
           }
-          if(yPos = 1) {
+          if(yPos == 1) {
             return left
           }
-          if(yPos = 1.5) {
+          if(yPos == 1.5) {
             return (left + tempVal3)/2
           }
         }
-        if(xPos = 0.5) {
-          if(yPos = 0) {
+        if(xPos == 0.5) {
+          if(yPos == 0) {
             return (tempVal + top)/2
           }
-          if(yPos = 0.5) {
+          if(yPos == 0.5) {
             return (tempVal + top + center+ left)/4
           }
-          if(yPos = 1) {
+          if(yPos == 1) {
             return (left + center)/2
           }
-          if(yPos = 1.5) {
+          if(yPos == 1.5) {
             return (tempVal3 + left + center + bottom)/4
           }
         }
 
-        if(xPos = 1) {
-          if(yPos = 0) {
+        if(xPos == 1) {
+          if(yPos == 0) {
             return top
           }
-          if(yPos = 0.5) {
+          if(yPos == 0.5) {
             return (top + center)/2
           }
-          if(yPos = 1) {
+          if(yPos == 1) {
             return center
           }
-          if(yPos = 1.5) {
+          if(yPos == 1.5) {
             return (center + bottom)/2
           }
         }
 
-        if(xPos = 1.5) {
-          if(yPos = 0) {
+        if(xPos == 1.5) {
+          if(yPos == 0) {
             return (top + tempVal2)/2
           }
-          if(yPos = 0.5) {
+          if(yPos == 0.5) {
             return (top + center + tempVal2 + right)/4
           }
-          if(yPos = 1) {
+          if(yPos == 1) {
             return (center + right)/2
           }
-          if(yPos = 1.5) {
-            return (center + right + bottom + tempVal4)/2
+          if(yPos == 1.5) {
+            return (center + right + bottom + tempVal4)/4
           }
         }
 
