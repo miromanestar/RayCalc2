@@ -90,6 +90,7 @@ export class ResultsPage implements OnInit {
     this.width = state.width
     this.equivalentSqr = state.equivalentSqr
 
+    if(this.identifier = "") { this.identifier = "None" }
     //If 'opposed field' is chosen, use script divided by half
     if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
 
