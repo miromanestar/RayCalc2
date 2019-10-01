@@ -99,6 +99,11 @@ export class InputPagePage implements OnInit {
     }
   }
 
+  roundDepth() {
+    let depthn = Number(this.depth)
+    this.depth = String(Number((Number(depthn) * 2).toFixed())/2)
+  }
+
   changeLength() {
     var x1n = Number(this.x1);
     var x2n = Number(this.x2);

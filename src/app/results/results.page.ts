@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { sixMVSCP, tenMVSCP, eightMVSCP, sixMVPDD, tenMVPDD, eightMVPDD, sixMVTPR, tenMVTPR, eightMVTPR } from '../tables/legacy/legacy-tables'
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-results',
@@ -128,7 +129,6 @@ export class ResultsPage implements OnInit {
    }
 
    calculatePDDTPR(): number {
-     let result = 0
      let lines: any;
      if(this.calcSelect == "ssd") {
       if(this.energySelect == "6") { lines = sixMVPDD.split('\n') }
@@ -158,26 +158,78 @@ export class ResultsPage implements OnInit {
     //Determine if interpolation is needed
     let xIndex = xAxis.indexOf(sqr)
     let yIndex = yAxis.indexOf(depthn)
+
     if(xIndex != -1 && yIndex != -1) { //If no interpolation is needed, simply grab the value by itself
       let tempVal = lines[yIndex + 1].split(',')
-      result = tempVal[xIndex + 1]
+      return tempVal[xIndex + 1]
+
     } else if(xIndex != -1 && yIndex == -1) { //Interpolate for depth, grab equivalent square
       let tempYIndex = yAxis.indexOf(this.trunc(depthn)) 
       if(tempYIndex != -1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) { //This is only to interpolate once
         let tempVal = lines[tempYIndex + 1].split(',')
         let tempVal2 = lines[tempYIndex + 2].split(',')
-        result = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
-      } else { //Need to interpolate twice
-        //Implement this tomorrow
+        return (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
 
+      } else { //Need to interpolate twice
+        tempYIndex = yAxis.indexOf(depthn-0.5) //Interpolate for lower half; i.e. 10.5 between 10 and 12
+        if(tempYIndex != -1) {
+          let tempVal = lines[tempYIndex + 1].split(',')
+          let tempVal2 = lines[tempYIndex +2].split(',')
+          let interpolatedVal = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
+          return (Number(tempVal[xIndex + 1]) + interpolatedVal)/2
+        }
+
+        tempYIndex = yAxis.indexOf(depthn-1) //Interpolate for middle; i.e. 11 between 10 and 12
+        if(tempYIndex != -1) {
+          let tempVal = lines[tempYIndex + 1].split(',')
+          let tempVal2 = lines[tempYIndex + 2].split(',')
+          return (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
+        }
+
+        tempYIndex = yAxis.indexOf(depthn-1.5) //Interpolate for upper half; i.e. 11.5 between 10 and 12
+        if(tempYIndex != -1) {
+          let tempVal = lines[tempYIndex + 1].split(',')
+          let tempVal2 = lines[tempYIndex +2].split(',')
+          let interpolatedVal = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
+          return (Number(tempVal2[xIndex + 1]) + interpolatedVal)/2
+        }
       }
     } else if(xIndex == -1 && yIndex != -1) { //Interpolate for equivalent square, grab depth
+      let tempXIndex = xAxis.indexOf(this.trunc(sqr))
+      if(tempXIndex  != -1 && Number(xAxis[tempXIndex + 1] - Number(xAxis[tempXIndex]) == 1)) { //Interpolate once
+        let tempVal = lines[yIndex + 1].split(',')
+        return (Number(tempVal[tempXIndex + 1]) + Number(tempVal[tempXIndex + 2]))/2 
 
+      } else { //Need to interpolate equivalent square twice
+        tempXIndex = xAxis.indexOf(sqr-0.5) //Interpolate for lower half; i.e. 10.5 between 10 and 12
+        if(tempXIndex != -1) {
+          let tempVal = lines[yIndex + 1].split(',')
+          let tempVal2 = tempVal[tempXIndex + 1]
+          let interpolatedVal = (Number(tempVal2) + Number(tempVal[tempXIndex + 2]))/2
+          return (Number(tempVal2) + interpolatedVal)/2
+        }
+
+        tempXIndex = xAxis.indexOf(sqr-1) //Interpolate for middle; i.e. 11 between 10 and 12
+        if(tempXIndex != -1) {
+          let tempVal = lines[yIndex + 1].split(',')
+          let tempVal2 = tempVal[tempXIndex + 1]
+          let tempVal3 = tempVal[tempXIndex + 2]
+          return (Number(tempVal2) + Number(tempVal3))/2
+        }
+
+        tempXIndex = xAxis.indexOf(sqr-1.5) //Interpolate for upper half; i.e. 11.5 between 10 and 12
+        if(tempXIndex != -1) {
+          let tempVal = lines[yIndex + 1].split(',')
+          let tempVal2 = tempVal[tempXIndex + 1]
+          let interpolatedVal = (Number(tempVal2) + Number(tempVal[tempXIndex + 2]))/2
+          return (interpolatedVal + Number(tempVal[tempXIndex + 2]))/2
+        }
+      }
     } else { //Interpolate for both
-
+      
     }
 
-    return result
+    return 0
    }
 
    trunc(num: number): number {

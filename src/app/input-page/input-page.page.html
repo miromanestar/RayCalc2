@@ -11,7 +11,7 @@
         <!-- Identifer Row -->
         <ion-item>
             <ion-label position="stacked" class="input-label">Identifier</ion-label>
-            <ion-input  [ngStyle]="identifierStyle" [(ngModel)]="identifier" placeholder="Optional" clearInput="true"></ion-input>
+            <ion-input [ngStyle]="identifierStyle" [(ngModel)]="identifier" placeholder="Optional" clearInput="true"></ion-input>
         </ion-item>
 
         <!-- Treatment Site Row -->
@@ -42,21 +42,21 @@
             <ion-col style="padding-left:0px !important; padding-right: 0px !important;">
                 <ion-item>
                     <ion-label position="stacked" class="input-label">SSD</ion-label>
-                    <ion-input readonly="{{ disableSSD }}" [ngStyle]="ssdStyle" [(ngModel)]="ssd"  (ngModelChange)="changeISO('ssd')" (ionFocus)="resetInputs('ssd')" placeholder="80, 100" inputmode="decimal" readonly="true" required="true"></ion-input>
+                    <ion-input readonly="{{ disableSSD }}" [ngStyle]="ssdStyle" [(ngModel)]="ssd" (ngModelChange)="changeISO('ssd')" (ionFocus)="resetInputs('ssd')" placeholder="80, 100" inputmode="decimal" readonly="true" required="true"></ion-input>
                 </ion-item>
             </ion-col>
             <!-- Depth Column -->
             <ion-col>
                 <ion-item>
                     <ion-label position="stacked" class="input-label">Depth</ion-label>
-                    <ion-input [ngStyle]="depthStyle" [(ngModel)]="depth"  (ngModelChange)="changeISO('depth')" (ionFocus)="resetInputs('depth')" placeholder="Depth" inputmode="decimal" required="true"></ion-input>
+                    <ion-input [ngStyle]="depthStyle" [(ngModel)]="depth" (ngModelChange)="changeISO('depth')" (ionFocus)="resetInputs('depth')" (ionBlur)="roundDepth()" placeholder="Depth" inputmode="decimal" required="true"></ion-input>
                 </ion-item>
             </ion-col>
             <!-- Energy Column -->
             <ion-col>
                 <ion-item style="padding-right: 0px;">
                     <ion-label position="stacked" class="input-label">Energy (MV)</ion-label>
-                    <ion-input [ngStyle]="energyStyle" [(ngModel)]="energySelect" (ionFocus)="resetInputs('energy')" placeholder="Energy Level" inputmode="none" required="true"  readonly="true" (click)="openPicker('energy')"></ion-input>
+                    <ion-input [ngStyle]="energyStyle" [(ngModel)]="energySelect" (ionFocus)="resetInputs('energy')" placeholder="Energy Level" inputmode="none" required="true" readonly="true" (click)="openPicker('energy')"></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
