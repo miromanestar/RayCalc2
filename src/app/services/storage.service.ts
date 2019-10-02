@@ -60,6 +60,6 @@ export class StorageService {
   }
 
   clearHistory() {
-    this.storage.remove(HIST_KEY)
+    this.storage.clear()
   }
 }

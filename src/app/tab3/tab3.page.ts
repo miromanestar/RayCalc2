@@ -11,7 +11,7 @@ export class Tab3Page implements OnInit {
 
   historys: History[] = [];
 
-  @ViewChild('hist-key')myList: History;
+  //@ViewChild('hist-key')myList: History;
 
   constructor(private storageService: StorageService, private plt: Platform, private toastController: ToastController) {
     this.loadHistory();
@@ -25,7 +25,7 @@ export class Tab3Page implements OnInit {
 
   deleteSingleHistory(history: History) {
     this.storageService.deleteHistoryItem(history.id).then(history => {
-      this.myList.closeSlidingItems();
+      //this.myList.closeSlidingItems();
       this.loadHistory();
     })
   }
