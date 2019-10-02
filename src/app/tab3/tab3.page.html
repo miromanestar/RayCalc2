@@ -3,7 +3,33 @@
         <ion-title>
             History
         </ion-title>
+        <ion-button style="float:right;" fill="clear" (onclick)="deleteHistory()">Clear</ion-button>
     </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <ion-list #history>
+
+        <ion-list-header>
+            <ion-label>History</ion-label>
+        </ion-list-header>
+
+        <ion-item-sliding *ngFor="let history of historys">
+
+            <ion-item>
+                <ion-label text-wrap>
+                    <h3>{{ history.identifier }}</h3>
+                    <ion-text color="secondary">
+                        <p>{{ history.PDDTPR }}</p>
+                    </ion-text>
+                    <p>{{ history.date }}</p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="deleteSingleHistory(history)">Delete</ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+</ion-content>

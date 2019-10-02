@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { sixMVSCP, tenMVSCP, eightMVSCP, sixMVPDD, tenMVPDD, eightMVPDD, sixMVTPR, tenMVTPR, eightMVTPR } from '../tables/legacy/legacy-tables'
-import { IfStmt } from '@angular/compiler';
+import { StorageService, History } from '../services/storage.service';
 
 @Component({
   selector: 'app-results',
@@ -41,7 +41,7 @@ export class ResultsPage implements OnInit {
   date = "Error: Cannot grab date";
   name = "Error: No value found";
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private storageService: StorageService ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as { 
       calcSelect: string,
@@ -61,9 +61,37 @@ export class ResultsPage implements OnInit {
       equivalentSqr: string
     };
     this.setValues(state);
+    this.history();
    }
+
+   history() {
+    const historyCont: History = {
+      id: new Number,
+      identifier: this.identifier,
+      calcTitle: this.calcTitle,
+      treatSite: this.treatSite,
+      energySelect: this.energySelect,
+      script: this.script,
+      inverseSqr: this.inverseSqr,
+      ssd: this.ssd,
+      depth: this.depth,
+      length: this.length,
+      width: this.width,
+      equivalentSqr: this.equivalentSqr,
+      dpf: this.dpf,
+      scp: this.scp,
+      PDDTPR: this.PDDTPR,
+      mus: this.mus,
+      calcFormula: this.calcFormula,
+    } 
+    
+    this.storageService.addHistory(historyCont).then(history => {
+     console.log(historyCont)
+    });
+
+  }
    
-   setValues(state: any) {
+  setValues(state: any) {
     
     //Date
     let today = new Date();
@@ -72,7 +100,7 @@ export class ResultsPage implements OnInit {
     if(today.getHours() > 12) {
       hour = today.getHours() - 12;
       ampm = "PM";
-    } else { ampm = "AM"}
+    } else { ampm == "AM"}
     this.date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + " at " + hour + ":" + today.getMinutes() + " " + ampm;
 
     this.identifier = state.identifier
@@ -129,7 +157,7 @@ export class ResultsPage implements OnInit {
       this.mus = (scriptn/(scpn * pddtpr * inverseSqrn)).toFixed()
     }
 
-   } //setValues end of method
+  } //setValues end of method
 
    calculateSCP(): number {
      let lines: any;
@@ -243,7 +271,7 @@ export class ResultsPage implements OnInit {
           return (interpolatedVal + Number(tempVal[tempXIndex + 2]))/2
         }
       }
-    } else { //Interpolate for both
+    } else { //Interpolate where at least 1 requires interpolation in larger data-gaps
 
       //Interpolate if both values only have to interpolate once
       let tempYIndex = yAxis.indexOf(this.trunc(depthn))
@@ -369,7 +397,6 @@ export class ResultsPage implements OnInit {
      let index = temp.indexOf('.')
      return Number(temp.substring(0, index))
    }
-
 
   ngOnInit() {
   }
