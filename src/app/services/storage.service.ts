@@ -58,4 +58,8 @@ export class StorageService {
       return this.storage.set(HIST_KEY, toKeep);
     });
   }
+
+  clearHistory() {
+    this.storage.remove(HIST_KEY)
+  }
 }

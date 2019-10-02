@@ -11,7 +11,7 @@ export class Tab3Page implements OnInit {
 
   historys: History[] = [];
 
-  @ViewChild('hist-key')myList: List;
+  @ViewChild('hist-key')myList: History;
 
   constructor(private storageService: StorageService, private plt: Platform, private toastController: ToastController) {
     this.loadHistory();
@@ -28,6 +28,10 @@ export class Tab3Page implements OnInit {
       this.myList.closeSlidingItems();
       this.loadHistory();
     })
+  }
+
+  clearHistory() {
+    this.storageService.clearHistory()
   }
 
   ngOnInit() {

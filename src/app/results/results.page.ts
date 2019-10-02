@@ -209,126 +209,143 @@ export class ResultsPage implements OnInit {
       let tempVal = lines[yIndex + 1].split(',')
       return tempVal[xIndex + 1]
 
-    } else if(xIndex != -1 && yIndex == -1) { //Interpolate for depth, grab equivalent square
-      let tempYIndex = yAxis.indexOf(this.trunc(depthn)) 
-      if(tempYIndex != -1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) { //This is only to interpolate once
-        let tempVal = lines[tempYIndex + 1].split(',')
-        let tempVal2 = lines[tempYIndex + 2].split(',')
-        return (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
+    } else { //One or both values must interpolate twice... this is going to be really annoying to code
 
-      } else { //Need to interpolate twice
-        tempYIndex = yAxis.indexOf(depthn-0.5) //Interpolate for lower half; i.e. 10.5 between 10 and 12
-        if(tempYIndex != -1) {
-          let tempVal = lines[tempYIndex + 1].split(',')
-          let tempVal2 = lines[tempYIndex +2].split(',')
-          let interpolatedVal = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
-          return (Number(tempVal[xIndex + 1]) + interpolatedVal)/2
+      //Determine index of needed yAxis data
+      let tempYIndex = yAxis.indexOf(depthn)
+      let yPos = 0
+      if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-0.5); yPos = 0.5 }
+      if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1); yPos = 1 }
+      if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1.5); yPos = 1.5 }
+
+      //Determine index of needed xAxis data
+      let tempXIndex = xAxis.indexOf(sqr)
+      let xPos = 0
+      if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-0.5); xPos = 0.5 }
+      if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1); xPos = 1 }
+      if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1.5); xPos = 1.5 }
+
+      //Now grab the data
+      let tempArr1 = lines[tempYIndex + 1].split(',')
+      let tempArr2 = lines[tempYIndex + 2].split(',')
+
+      /*Layout of data:
+          
+          tempVal   tempVal2
+          tempVal3  tempVal4
+      */
+      let tempVal = Number(tempArr1[tempXIndex + 1])
+      let tempVal2 = Number(tempArr1[tempXIndex + 2])
+      let tempVal3 = Number(tempArr2[tempXIndex + 1])
+      let tempVal4 = Number(tempArr2[tempXIndex + 2])
+
+      /* Interpolation layout for 2 gaps:        |  Interpolation layout for 1 gap:
+          10    10.5    11    11.5    12         |         5         5.5       6
+      10  tempVal       top           tempVal2   |   5   tempVal     top     tempVal2
+      10.5                                       |
+      11  left          center        right      |  5.5  left       center   right
+      11.5                                       |
+      12  tempVal3      bottom        tempVal4   |   6   tempVal3   bottom   tempVal4
+      */
+      let center = (tempVal + tempVal2 + tempVal3 + tempVal4)/4
+      let left = (tempVal + tempVal3)/2
+      let right = (tempVal2 + tempVal4)/2
+      let top = (tempVal + tempVal2)/2
+      let bottom = (tempVal3 + tempVal4)/2
+
+      //Interpolate for one gap in both; i.e. 5,6
+      if(xAxis[tempXIndex + 1] - xAxis[tempXIndex] == 1 && yAxis[tempYIndex + 1] - yAxis[tempYIndex] == 1) {
+        if(xPos == 0) {
+          if(yPos == 0.5) {
+            return left
+          }
         }
-
-        tempYIndex = yAxis.indexOf(depthn-1) //Interpolate for middle; i.e. 11 between 10 and 12
-        if(tempYIndex != -1) {
-          let tempVal = lines[tempYIndex + 1].split(',')
-          let tempVal2 = lines[tempYIndex + 2].split(',')
-          return (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
-        }
-
-        tempYIndex = yAxis.indexOf(depthn-1.5) //Interpolate for upper half; i.e. 11.5 between 10 and 12
-        if(tempYIndex != -1) {
-          let tempVal = lines[tempYIndex + 1].split(',')
-          let tempVal2 = lines[tempYIndex +2].split(',')
-          let interpolatedVal = (Number(tempVal[xIndex + 1]) + Number(tempVal2[xIndex + 1]))/2
-          return (Number(tempVal2[xIndex + 1]) + interpolatedVal)/2
-        }
-      }
-    } else if(xIndex == -1 && yIndex != -1) { //Interpolate for equivalent square, grab depth
-      let tempXIndex = xAxis.indexOf(this.trunc(sqr))
-      if(tempXIndex  != -1 && Number(xAxis[tempXIndex + 1] - Number(xAxis[tempXIndex]) == 1)) { //Interpolate once
-        let tempVal = lines[yIndex + 1].split(',')
-        return (Number(tempVal[tempXIndex + 1]) + Number(tempVal[tempXIndex + 2]))/2 
-
-      } else { //Need to interpolate equivalent square twice
-        tempXIndex = xAxis.indexOf(sqr-0.5) //Interpolate for lower half; i.e. 10.5 between 10 and 12
-        if(tempXIndex != -1) {
-          let tempVal = lines[yIndex + 1].split(',')
-          let tempVal2 = tempVal[tempXIndex + 1]
-          let interpolatedVal = (Number(tempVal2) + Number(tempVal[tempXIndex + 2]))/2
-          return (Number(tempVal2) + interpolatedVal)/2
-        }
-
-        tempXIndex = xAxis.indexOf(sqr-1) //Interpolate for middle; i.e. 11 between 10 and 12
-        if(tempXIndex != -1) {
-          let tempVal = lines[yIndex + 1].split(',')
-          let tempVal2 = tempVal[tempXIndex + 1]
-          let tempVal3 = tempVal[tempXIndex + 2]
-          return (Number(tempVal2) + Number(tempVal3))/2
-        }
-
-        tempXIndex = xAxis.indexOf(sqr-1.5) //Interpolate for upper half; i.e. 11.5 between 10 and 12
-        if(tempXIndex != -1) {
-          let tempVal = lines[yIndex + 1].split(',')
-          let tempVal2 = tempVal[tempXIndex + 1]
-          let interpolatedVal = (Number(tempVal2) + Number(tempVal[tempXIndex + 2]))/2
-          return (interpolatedVal + Number(tempVal[tempXIndex + 2]))/2
+        if(xPos == 0.5) {
+          if(yPos == 0) {
+            return top
+          }
+          if(yPos == 0.5) {
+            return center
+          }
         }
       }
-    } else { //Interpolate where at least 1 requires interpolation in larger data-gaps
 
-      //Interpolate if both values only have to interpolate once
-      let tempYIndex = yAxis.indexOf(this.trunc(depthn))
-      let tempXIndex = xAxis.indexOf(this.trunc(sqr))
-      if(tempYIndex != -1 && tempXIndex != -1 && Number(xAxis[tempXIndex + 1]) - Number(xAxis[tempXIndex]) == 1 && Number(yAxis[tempYIndex + 1]) - Number(yAxis[tempYIndex]) == 1) {
-        let tempVal = lines[tempYIndex + 1].split(',');
-        let tempVal2 = lines[tempYIndex + 2].split(',');
-        let tempVal3 = Number(tempVal[tempXIndex + 1]) //Grab equivalent sqr
-        let tempVal4 = Number(tempVal2[tempXIndex + 1]) //
-        let tempVal5 = Number(tempVal[tempXIndex + 2]) //
-        let tempVal6 = Number(tempVal2[tempXIndex + 2]) //
-        return (tempVal3 + tempVal4 + tempVal5 + tempVal6)/4
-      } else { //One or both values must interpolate twice... this is going to be really annoying to code
+      /*Interpolate for two gap in x axis, 1 gap in y axis
+            10      10.5      11      11.5     12
+      5   tempVal            top              tempVal2
+      5.5 left              center            right
+      6   tempVal3          bottom            tempVal4
+      */
+      if(xAxis[tempXIndex + 1] - xAxis[tempXIndex] == 2 && yAxis[tempYIndex + 1] - yAxis[tempYIndex] == 1) {
+        if(xPos == 0) {
+          if(yPos == 0.5) {
+            return left
+          }
+        }
+        if(xPos == 0.5) {
+          if(yPos == 0) {
+            return (tempVal + top)/2
+          }
+          if(yPos == 0.5) {
+            return (left + center)/2
+          }
+        }
+        if(xPos == 1) {
+          if(yPos == 0) {
+            return top
+          }
+          if(yPos == 0.5) {
+            return center
+          }
+        }
+        if(xPos == 1.5) {
+          if(yPos == 0) {
+            return (top + tempVal2)/2
+          }
+          if(yPos == 0.5) {
+            return (center + right)/2
+          }
+        }
+      }
 
-        //Determine index of needed yAxis data
-        let tempYIndex = yAxis.indexOf(depthn)
-        let yPos = 0
-        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-0.5); yPos = 0.5 }
-        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1); yPos = 1 }
-        if(tempYIndex == -1) { tempYIndex = yAxis.indexOf(depthn-1.5); yPos = 1.5 }
-
-        //Determine index of needed xAxis data
-        let tempXIndex = xAxis.indexOf(sqr)
-        let xPos = 0
-        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-0.5); xPos = 0.5 }
-        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1); xPos = 1 }
-        if(tempXIndex == -1) { tempXIndex = xAxis.indexOf(sqr-1.5); xPos = 1.5 }
-
-        //Now grab the data
-        let tempArr1 = lines[tempYIndex + 1].split(',')
-        let tempArr2 = lines[tempYIndex + 2].split(',')
-
-        /*Layout of data:
-            
-            tempVal   tempVal2
-            tempVal3  tempVal4
-        */
-        let tempVal = Number(tempArr1[tempXIndex + 1])
-        let tempVal2 = Number(tempArr1[tempXIndex + 2])
-        let tempVal3 = Number(tempArr2[tempXIndex + 1])
-        let tempVal4 = Number(tempArr2[tempXIndex + 2])
-
-        /* Interpolation layout:
-            10    10.5    11    11.5    12
-        10  tempVal       top           tempVal2
+      /* Interpolate if x axis has one gap and y axis has two
+                5         5.5         6
+        10    tempVal     top        tempVal2
         10.5
-        11  left          center        right
+        11    left        center      right
         11.5
-        12  tempVal3      bottom        tempVal4
-        */
-        let center = (tempVal + tempVal2 + tempVal3 + tempVal4)/4
-        let left = (tempVal + tempVal3)/2
-        let right = (tempVal2 + tempVal4)/2
-        let top = (tempVal + tempVal2)/2
-        let bottom = (tempVal3 + tempVal4)/2
+        12    tempVal3    bottom      tempVal4
+      */
+      if(xAxis[tempXIndex + 1] - xAxis[tempXIndex] == 1 && yAxis[tempYIndex + 1] - yAxis[tempYIndex] == 2) {
+        if(xPos == 0) {
+          if(yPos == 0.5) {
+            return (tempVal + left)/2
+          }
+          if(yPos == 1) {
+            return left
+          }
+          if(yPos == 1.5) {
+            return (left + tempVal3)/2
+          }
+        }
+        if(xPos == 0.5) {
+          if(yPos == 0) {
+            return top
+          }
+          if(yPos == 0.5) {
+            return (top + center)/2
+          }
+          if(yPos == 1) {
+            return center
+          }
+          if(yPos == 1.5) {
+            return (center + bottom)/2
+          }
+        }
+      }
 
-        //Now interpolate given certain conditions
+      //Interpolate for two gaps in both; i.e. 10, 12
+      if(xAxis[tempXIndex + 1] - xAxis[tempXIndex] == 2 && yAxis[tempYIndex + 1] - yAxis[tempYIndex] == 2) {
         if(xPos == 0) {
           if(yPos == 0.5) {
             return (tempVal + left)/2
@@ -384,19 +401,9 @@ export class ResultsPage implements OnInit {
             return (center + right + bottom + tempVal4)/4
           }
         }
-
-        //Phew... there's probably a much better way to do this...
+       }
       }
     }
-
-    return 0
-   }
-
-   trunc(num: number): number {
-     let temp = String(num)
-     let index = temp.indexOf('.')
-     return Number(temp.substring(0, index))
-   }
 
   ngOnInit() {
   }
