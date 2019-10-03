@@ -1,32 +1,34 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="primary">
+            <ion-button slot="secondary" fill="clear" (click)="clearHistory()">Clear</ion-button>
+        </ion-buttons>
         <ion-title>
             History
         </ion-title>
-        <ion-button style="float:right;" fill="clear" (onclick)="clearHistory()">Clear</ion-button>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list #history>
-
-        <ion-list-header>
-            <ion-label>History</ion-label>
-        </ion-list-header>
+    <ion-list #myHistoryList>
 
         <ion-item-sliding *ngFor="let history of historys">
 
-            <ion-item>
-                <ion-label text-wrap>
-                    <h3>{{ history.identifier }}</h3>
-                    <ion-text color="secondary">
-                        <p>{{ history.PDDTPR }}</p>
-                    </ion-text>
-                    <p>{{ history.date }}</p>
-                </ion-label>
+            <ion-item lines="none">
+                <ion-card style="width: 100%; margin-left: 8px;" (click)="goToHistoryView(history)">
+                    <ion-card-header class="card-header">
+                        <ion-card-title class="entry-title">Result: {{ history.mus }} mu's @ {{ history.energySelect }}MV</ion-card-title>
+                        <ion-card-subtitle>{{ history.calcTitle }}</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content class="card-content">
+                        <p>Identifier: {{ history.identifier }}</p>
+                        <p>Treatment Site: {{ history.treatSite }}</p>
+                        <p>{{ history.date }}</p>
+                    </ion-card-content>
+                </ion-card>
             </ion-item>
 
-            <ion-item-options side="end">
+            <ion-item-options side="end" lines="none">
                 <ion-item-option color="danger" (click)="deleteSingleHistory(history)">Delete</ion-item-option>
             </ion-item-options>
         </ion-item-sliding>

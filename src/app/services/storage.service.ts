@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 export interface History {
-  id: Number
+  id: Date
   identifier: string,
   calcTitle: string,
   treatSite: string,
@@ -19,9 +19,13 @@ export interface History {
   PDDTPR: string,
   mus: string,
   calcFormula: string,
+  date: string,
+  name: string,
 }
 
 const HIST_KEY = 'hist-key'
+const NAME_KEY = 'name-key'
+const ISO_KEY = 'iso-key'
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +34,26 @@ export class StorageService {
 
   constructor(private storage: Storage) { }
 
+  setName(name: string): Promise<string> {
+    return this.storage.set(NAME_KEY, name)
+  }
+
+  getName(): Promise<string> {
+    return this.storage.get(NAME_KEY)
+  }
+
+  setISO(iso: string): Promise<string> {
+    return this.storage.set(ISO_KEY, iso)
+  }
+
+  getISO(): Promise<string> {
+    return this.storage.get(ISO_KEY)
+  }
+
   addHistory(history: History): Promise<History[]> {
     return this.storage.get(HIST_KEY).then((historys: History[]) => {
       if(historys) {
-        historys.push(history)
+        historys.unshift(history)
         return this.storage.set(HIST_KEY, historys);
       } else {
         return this.storage.set(HIST_KEY, [history]);
@@ -45,21 +65,23 @@ export class StorageService {
     return this.storage.get(HIST_KEY);
   }
 
-  deleteHistoryItem(id: number): Promise<History> {
+  deleteHistoryItem(id: Date): Promise<History> {
     return this.storage.get(HIST_KEY).then((historys: History[]) => {
       if(!historys || historys.length === 0) { return null; }
 
       let toKeep: History[] = [];
       for(let i of historys) {
         if(i.id != id) {
-          toKeep.push(i);
+          toKeep.unshift(i);
         }
       }
       return this.storage.set(HIST_KEY, toKeep);
     });
   }
-
-  clearHistory() {
-    this.storage.clear()
+  
+  clearHistory(): Promise<any> {
+    return this.storage.remove(HIST_KEY).then((historys: History[]) => {
+      console.log(historys)
+    })
   }
 }

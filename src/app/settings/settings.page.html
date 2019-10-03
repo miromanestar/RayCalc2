@@ -1,6 +1,8 @@
 <ion-header>
     <ion-toolbar>
-        <ion-button style="float: right;" (click)="closeModal()" fill="clear">Close</ion-button>
+        <ion-buttons slot="primary">
+            <ion-button (click)="closeModal()" fill="clear">Close</ion-button>
+        </ion-buttons>
         <ion-title>Settings</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -8,10 +10,14 @@
 <ion-content>
     <ion-item>
         <ion-label class="setting-label" position="stacked">Dosimetrist Name</ion-label>
-        <ion-input placeholder="Please enter your name"></ion-input>
+        <ion-input [(ngModel)]="name" clearInput="true" placeholder="Please enter your name"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label class="setting-label" position="stacked">ISO</ion-label>
-        <ion-input placeholder="Eg. 80 or 100" value="100"></ion-input>
+        <ion-input inputmode="none" readonly="true" [(ngModel)]="iso" (click)="openPicker()" clearInput="true" placeholder="Eg. 80 or 100" value="100"></ion-input>
     </ion-item>
+    <ion-button expand="block" style="margin-top: 30px;" (click)="saveSettings()">Save</ion-button>
+    <ion-text color="success">
+        <p class="saved-msg" style="text-align: center;">{{ confirmation }}</p>
+    </ion-text>
 </ion-content>

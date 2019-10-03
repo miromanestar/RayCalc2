@@ -4,6 +4,8 @@ import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { NgStyle } from '@angular/common';
 import { ResultsPage } from '../results/results.page';
+import { StorageService } from '../services/storage.service';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-input-page',
@@ -47,15 +49,24 @@ export class InputPagePage implements OnInit {
   //Enable/disable SSD
   disableSSD = "false";
 
-  constructor(public router : Router, private pickerCtrl : PickerController) { 
+  constructor(public router : Router, private pickerCtrl : PickerController, private storageService: StorageService) { 
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as { calcSelect: string };
     this.setCalcType(state);
   }
 
   //Also will set the variable for calcSelect to be used to determine properties of different input fields, important for the different calculation types.
-  private setCalcType(state: { calcSelect: string; }) {
-    if(state.calcSelect == 'ssd') { this.WhichSelected = 'SSD Calculation'; this.fieldSelect = 'Single'; this.ssd = "100"; this.disableSSD = "true"; }
+  private setCalcType(state: { calcSelect: string; }) { //Load ISO from settings
+
+    if(state.calcSelect == 'ssd') { 
+      this.WhichSelected = 'SSD Calculation'; 
+      this.fieldSelect = 'Single';  
+      this.disableSSD = "true"; 
+
+      this.storageService.getISO().then(iso => {
+        if(iso != "" && isNumber(iso)) { this.ssd= iso; } else {this.ssd = "100" }
+      });
+    }
     if(state.calcSelect =='sad') { this.WhichSelected = "SAD Calculation"}
     this.calcSelect = state.calcSelect;
   }

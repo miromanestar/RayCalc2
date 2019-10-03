@@ -39,7 +39,7 @@ export class ResultsPage implements OnInit {
 
   //Declare misc variables
   date = "Error: Cannot grab date";
-  name = "Error: No value found";
+  name = "Error: Cannot grab name";
 
   constructor(public router: Router, private storageService: StorageService ) {
     const navigation = this.router.getCurrentNavigation();
@@ -61,12 +61,16 @@ export class ResultsPage implements OnInit {
       equivalentSqr: string
     };
     this.setValues(state);
-    this.history();
    }
+
+  //Run the history method only AFTER everything is done because for SOME REASON retrieving from a key only happens after everything else...
+  ionViewDidEnter() {
+    this.history();
+  }
 
    history() {
     const historyCont: History = {
-      id: new Number,
+      id: new Date(),
       identifier: this.identifier,
       calcTitle: this.calcTitle,
       treatSite: this.treatSite,
@@ -83,6 +87,8 @@ export class ResultsPage implements OnInit {
       PDDTPR: this.PDDTPR,
       mus: this.mus,
       calcFormula: this.calcFormula,
+      date: this.date,
+      name: this.name,
     } 
     
     this.storageService.addHistory(historyCont).then(history => {
@@ -102,6 +108,13 @@ export class ResultsPage implements OnInit {
       ampm = "PM";
     } else { ampm == "AM"}
     this.date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + " at " + hour + ":" + today.getMinutes() + " " + ampm;
+
+     //Set name
+     this.storageService.getName().then(name => {
+      this.name = name;
+    });
+
+    if(this.name == "") { this.name = "Unknown" }
 
     this.identifier = state.identifier
     this.treatSite = state.treatSite
@@ -157,6 +170,7 @@ export class ResultsPage implements OnInit {
       this.mus = (scriptn/(scpn * pddtpr * inverseSqrn)).toFixed()
     }
 
+    if(this.mus == "NaN") { this.mus = "Error" }
   } //setValues end of method
 
    calculateSCP(): number {
