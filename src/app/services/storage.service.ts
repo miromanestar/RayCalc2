@@ -31,6 +31,7 @@ export interface History {
 const HIST_KEY = 'hist-key'
 const NAME_KEY = 'name-key'
 const ISO_KEY = 'iso-key'
+const THEME_KEY = 'theme-key'
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,14 @@ const ISO_KEY = 'iso-key'
 export class StorageService {
 
   constructor(private storage: Storage) { }
+
+  getTheme(): Promise<string> {
+    return this.storage.get(THEME_KEY)
+  }
+
+  setTheme(theme: string): Promise<string> {
+    return this.storage.set(THEME_KEY, theme)
+  }
 
   setName(name: string): Promise<string> {
     return this.storage.set(NAME_KEY, name)

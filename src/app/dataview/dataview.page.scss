@@ -4,18 +4,18 @@
 }
 
 .div-col-odd {
-    background: #f0f0f0;
+    background: var(--dataview-table-odd);
     padding: 15px;
 }
 
 .div-col-even {
-    background: #fff;
+    background: var(--ion-color-primary-contrast);
     padding: 15px;
 }
 
 .div-yaxis {
     padding: 15px;
-    background: #fff;
+    background: var(--ion-color-primary-contrast);
     position: sticky;
     box-shadow: 1px 0 0 #000
 }
@@ -32,7 +32,7 @@ tr td:first-child {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #fff;
+    background-color: var(--ion-color-primary-contrast);
     height: 100%;
     z-index: 998;
     //outline: 1px solid black;

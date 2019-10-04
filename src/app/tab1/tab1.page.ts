@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { StorageService } from '../services/storage.service';
 import { SettingsPage } from '../settings/settings.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'
+import { ThemeService } from '../services/theme.service';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -10,8 +13,18 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'
 })
 export class Tab1Page {
 
-  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser) {
+  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser, private theme: ThemeService, private storageService: StorageService) {
+    this.storageService.getTheme().then(theme => {
+     if(theme == 'enabled') { this.enableDark() } else { this.enableLight() }
+    })
+  }
 
+  enableDark() {
+    this.theme.enableDark();
+  }
+
+  enableLight() {
+    this.theme.enableLight();
   }
 
   async presentModal() {

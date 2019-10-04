@@ -3,6 +3,7 @@ import { NavParams, NavController, ModalController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,9 +15,19 @@ export class SettingsPage {
   name = "";
   iso = "";
   confirmation = "";
+  themeChoice = "";
+  darkModeEnabled = false;
 
-  constructor(public nav:NavController, public modalController:ModalController, private storageService: StorageService, private pickerCtrl: PickerController) { 
+  constructor(public nav:NavController, public modalController:ModalController, private storageService: StorageService, private pickerCtrl: PickerController, private theme: ThemeService) { 
     this.loadSettings();
+  }
+
+  enableDark() {
+    this.theme.enableDark();
+  }
+
+  enableLight() {
+    this.theme.enableLight();
   }
 
   async openPicker() {
@@ -35,6 +46,22 @@ export class SettingsPage {
     })
   }
 
+  toggleTheme(darkmode: boolean) {
+    if(darkmode) {
+      this.themeChoice = 'enabled'
+      this.storageService.setTheme(this.themeChoice).then(theme => {
+        console.log(theme)
+      });
+      this.enableDark();
+    } else {
+      this.themeChoice = 'disabled'
+      this.storageService.setTheme(this.themeChoice).then(theme => {
+        console.log(theme)
+      });
+      this.enableLight();
+    }
+  }
+
   ngOnInit() {
     this.loadSettings();
   }
@@ -50,6 +77,9 @@ export class SettingsPage {
     this.storageService.getISO().then(iso => {
       if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
+    this.storageService.getTheme().then(theme => {
+      if(theme) { this.themeChoice = theme; if(theme == "enabled") {this.darkModeEnabled = true }} else {  this.darkModeEnabled = false }
+    })
   }
 
   saveSettings() {
@@ -59,7 +89,10 @@ export class SettingsPage {
      });
      this.storageService.setISO(this.iso).then(iso => {
        console.log(iso)
-     })
+     });
+     this.storageService.setTheme(this.themeChoice).then(theme => {
+      console.log(theme)
+    });
   }
 
   ionViewWillEnter() {
