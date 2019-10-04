@@ -7,21 +7,24 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsPageModule } from './settings/settings.module'
 import { ResultsPageModule } from './results/results.module';
+import { DataviewpopoverComponent } from './dataviewpopover/dataviewpopover.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, DataviewpopoverComponent],
+  entryComponents: [DataviewpopoverComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
     NativeStorage,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

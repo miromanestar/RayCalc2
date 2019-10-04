@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { HistoryviewPage } from '../historyview/historyview.page'
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-tab3',
@@ -13,6 +14,7 @@ import { HistoryviewPage } from '../historyview/historyview.page'
 export class Tab3Page implements OnInit {
 
   historys: History[] = [];
+  historyMsgStyle: any;
 
   @ViewChild('myHistoryList', { static: false })myHistoryList: History;
 
@@ -24,12 +26,17 @@ export class Tab3Page implements OnInit {
 
   goToHistoryView(history: History) {
     const navigationExtras: NavigationExtras = { state: { history: history}};
-    this.router.navigate(['/historyview'], navigationExtras);
+    this.router.navigate(['/tabs/tab3/historyview'], navigationExtras);
   }
 
   loadHistory() {
     this.storageService.getHistory().then(historys => {
-      this.historys = historys;
+      if(historys.length !== 0) { this.historys = historys; this.historyMsgStyle = { 'display': 'none' } } else { this.historys = historys; this.historyMsgStyle = { 'display': 'block' } }
+    });
+  }
+  loadHistoryClear() { //Exists because for some reason hitting "clear" breaks the if statement...
+    this.storageService.getHistory().then(historys => {
+      if(historys) { this.historys = historys; this.historyMsgStyle = { 'display': 'none' } } else { this.historys = historys; this.historyMsgStyle = { 'display': 'block' } }
     });
   }
 
@@ -41,7 +48,7 @@ export class Tab3Page implements OnInit {
 
   clearHistory() {
     this.storageService.clearHistory()
-    this.loadHistory()
+    this.loadHistoryClear()
   }
 
   ionViewWillEnter() {

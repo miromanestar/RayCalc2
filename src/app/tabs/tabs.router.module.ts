@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { Tab3Page } from "../tab3/tab3.page"
 
 const routes: Routes = [
   {
@@ -15,7 +14,27 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-          }
+          },
+          {
+            path: 'input-page',
+            children: [
+              {
+                path: '',
+                loadChildren: () =>
+                  import('../input-page/input-page.module').then(m => m.InputPagePageModule)
+              }
+            ] 
+          },
+          {
+            path: 'results',
+            children: [
+              {
+                path: '',
+                loadChildren: () =>
+                  import('../results/results.module').then(m => m.ResultsPageModule)
+              }
+            ]
+          },
         ]
       },
       {
@@ -25,7 +44,17 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
+          },
+          {
+            path: 'dataview',
+            children: [
+              {
+                path: '',
+                loadChildren: () =>
+                  import('../dataview/dataview.module').then(m => m.DataviewPageModule)
+              }
+            ]
+          },
         ]
       },
       {
@@ -35,7 +64,17 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-          }
+          },
+          {
+            path: 'historyview',
+            children: [
+              {
+                path: '',
+                loadChildren: () =>
+                  import('../historyview/historyview.module').then(m => m.HistoryviewPageModule)
+              }
+            ]
+          },
         ]
       },
       {

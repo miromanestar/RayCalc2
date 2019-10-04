@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content>
+    <p style="text-align: center" [ngStyle]="historyMsgStyle">There is no history to display.</p>
     <ion-list #myHistoryList>
 
         <ion-item-sliding *ngFor="let history of historys">

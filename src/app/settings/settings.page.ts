@@ -48,7 +48,7 @@ export class SettingsPage {
       this.name = name;
     });
     this.storageService.getISO().then(iso => {
-      this.iso = iso;
+      if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
   }
 

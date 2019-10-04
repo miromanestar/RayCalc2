@@ -15,11 +15,16 @@ export class HistoryviewPage implements OnInit {
   calcTitle = "";
   treatSite = "";
   energySelect = "";
+  fieldSelect = "";
   script = "";
   inverseSqr = "";
   ssd = "";
   depth = "";
+  x1 = "";
+  x2 = "";
   length = "";
+  y1 = "";
+  y2 = "";
   width = "";
   equivalentSqr = "";
   dpf = "";
@@ -38,11 +43,16 @@ export class HistoryviewPage implements OnInit {
       calcTitle: string,
       treatSite: string,
       energySelect: string,
+      fieldSelect: string,
       script: string,
       inverseSqr: string,
       ssd: string,
       depth: string,
+      y1: string,
+      y2: string,
       length: string,
+      x1: string,
+      x2: string,
       width: string,
       equivalentSqr: string,
       dpf: string,
@@ -59,6 +69,7 @@ export class HistoryviewPage implements OnInit {
     this.calcTitle = state.calcTitle
     this.treatSite = state.treatSite
     this.energySelect = state.energySelect
+    this.fieldSelect = state.fieldSelect
     this.script = state.script
     this.inverseSqr = state.inverseSqr
     this.ssd = state.ssd
@@ -73,6 +84,28 @@ export class HistoryviewPage implements OnInit {
     this.calcFormula = state.calcFormula
     this.date = state.date
     this.name = state.name
+   }
+
+   goToInputPage() {
+    const navigationExtras : NavigationExtras = { state: { importData: {
+      calcSelect: this.calcTitle,
+      identifier: this.identifier,
+      treatSite: this.treatSite,
+      fieldSelect: this.fieldSelect,
+      energySelect: this.energySelect,
+      script: this.script,
+      ssd: this.ssd,
+      depth: this.depth,
+      x1: this.x1,
+      x2: this.x2,
+      length: this.length,
+      y1: this.y1,
+      y2: this.y2,
+      width: this.width,
+      equivalentSqr: this.equivalentSqr
+
+    }}};
+    this.router.navigate(['/tabs/tab1/input-page'], navigationExtras);
    }
 
   ngOnInit() {

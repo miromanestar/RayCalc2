@@ -51,14 +51,40 @@ export class InputPagePage implements OnInit {
 
   constructor(public router : Router, private pickerCtrl : PickerController, private storageService: StorageService) { 
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation.extras.state as { calcSelect: string };
-    this.setCalcType(state);
+    const state = navigation.extras.state as { calcSelect: string, importData: any,
+     };
+    
+    if(state.importData != null) { this.setImportData(state.importData) } else { this.setCalcType(state.calcSelect); }
+  }
+
+  setImportData(importData: any) {
+
+    this.identifier = importData.identifier
+    this.treatSite = importData.treatSite
+    this.fieldSelect = importData.fieldSelect
+    this.energySelect = importData.energySelect
+    this.script = importData.script
+    this.depth = importData.depth
+    this.length = importData.length
+    this.width = importData.width
+    this.ssd = importData.ssdStyle
+    this.equivalentSqr = importData.equivalentSqr
+    this.x1 = importData.x1
+    this.x2 = importData.x2
+    this.y1 = importData.y1
+    this.y2 = importData.y2
+
+    if(importData.calcSelect == "Source-Surface-Distance Calculation") {
+      this.calcSelect = "ssd"
+    } else { this.calcSelect = "sad" }
+
+    this.setCalcType(this.calcSelect)
   }
 
   //Also will set the variable for calcSelect to be used to determine properties of different input fields, important for the different calculation types.
-  private setCalcType(state: { calcSelect: string; }) { //Load ISO from settings
+  private setCalcType(calcSelect: string) { 
 
-    if(state.calcSelect == 'ssd') { 
+    if(calcSelect == 'ssd') { 
       this.WhichSelected = 'SSD Calculation'; 
       this.fieldSelect = 'Single';  
       this.disableSSD = "true"; 
@@ -67,8 +93,8 @@ export class InputPagePage implements OnInit {
         if(iso != "" && isNumber(iso)) { this.ssd= iso; } else {this.ssd = "100" }
       });
     }
-    if(state.calcSelect =='sad') { this.WhichSelected = "SAD Calculation"}
-    this.calcSelect = state.calcSelect;
+    if(calcSelect =='sad') { this.WhichSelected = "SAD Calculation"}
+    this.calcSelect = calcSelect;
   }
 
   //Picker selection, takes string input to determine which values to display
@@ -181,7 +207,7 @@ export class InputPagePage implements OnInit {
           equivalentSqr: this.equivalentSqr
         }
       };
-      this.router.navigate(['/results'], navigationExtras);
+      this.router.navigate(['/tabs/tab1/results'], navigationExtras);
     } else {
       if(this.script == "") { this.script = "Required"; this.scriptStyle = { 'color': 'red'}}
       if(this.depth == "") { this.depth = "Required"; this.depthStyle = { 'color': 'red'}}

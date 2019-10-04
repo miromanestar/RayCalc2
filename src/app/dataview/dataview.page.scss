@@ -1,0 +1,41 @@
+.data-table {
+    width: 100%;
+    position: relative;
+}
+
+.div-col-odd {
+    background: #f0f0f0;
+    padding: 15px;
+}
+
+.div-col-even {
+    background: #fff;
+    padding: 15px;
+}
+
+.div-yaxis {
+    padding: 15px;
+    background: #fff;
+    position: sticky;
+    box-shadow: 1px 0 0 #000
+}
+
+tr td:first-child {
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 50%
+}
+
+#header {
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    height: 100%;
+    z-index: 998;
+    //outline: 1px solid black;
+    //box-shadow: 0 1px #000;
+    box-shadow: 0 1px #000;
+}

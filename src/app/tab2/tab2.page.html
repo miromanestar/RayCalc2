@@ -6,4 +6,65 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <ion-card>
+        <ion-card-header class="card-header">
+            <ion-card-title>SCP Tables</ion-card-title>
+            <ion-card-subtitle>Legacy Northside Data</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('6mvSCP')">6MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('10mvSCP')">10MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('18mvSCP')">18MV</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header class="card-header">
+            <ion-card-title>PDD Tables</ion-card-title>
+            <ion-card-subtitle>Legacy Northside Data</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('6mvPDD')">6MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('10mvPDD')">10MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('18mvPDD')">18MV</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header class="card-header">
+            <ion-card-title>TPR Tables</ion-card-title>
+            <ion-card-subtitle>Legacy Northside Data</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('6mvTPR')">6MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('10mvTPR')">10MV</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button expand="block" (click)="viewData('18mvTPR')">18MV</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

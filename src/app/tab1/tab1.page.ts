@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
-import { InputPagePage } from '../input-page/input-page.page';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,7 +10,7 @@ import { InputPagePage } from '../input-page/input-page.page';
 })
 export class Tab1Page {
 
-  constructor(public router: Router, public modalController : ModalController) {
+  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser) {
 
   }
 
@@ -24,6 +23,10 @@ export class Tab1Page {
 
   goToInputPage(calcType: String) {
     const navigationExtras : NavigationExtras = { state: { calcSelect: calcType }};
-    this.router.navigate(['/input-page'], navigationExtras);
+    this.router.navigate(['/tabs/tab1/input-page'], navigationExtras);
+  }
+
+  openInApp(url: string) {
+    this.iab.create(url, '_blank');
   }
 }

@@ -75,12 +75,17 @@ export class ResultsPage implements OnInit {
       calcTitle: this.calcTitle,
       treatSite: this.treatSite,
       energySelect: this.energySelect,
+      fieldSelect: this.fieldSelect,
       script: this.script,
       inverseSqr: this.inverseSqr,
       ssd: this.ssd,
       depth: this.depth,
       length: this.length,
+      x1: this.x1,
+      x2: this.x2,
       width: this.width,
+      y1: this.y1,
+      y2: this.y2,
       equivalentSqr: this.equivalentSqr,
       dpf: this.dpf,
       scp: this.scp,
@@ -106,15 +111,13 @@ export class ResultsPage implements OnInit {
     if(today.getHours() > 12) {
       hour = today.getHours() - 12;
       ampm = "PM";
-    } else { ampm == "AM"}
+    } else { hour = today.getHours(); ampm = "AM"}
     this.date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + " at " + hour + ":" + today.getMinutes() + " " + ampm;
 
      //Set name
      this.storageService.getName().then(name => {
-      this.name = name;
+      if(name) { this.name = name; } else { this.name = "Unknown" }
     });
-
-    if(this.name == "") { this.name = "Unknown" }
 
     this.identifier = state.identifier
     this.treatSite = state.treatSite
@@ -135,6 +138,8 @@ export class ResultsPage implements OnInit {
     if(this.identifier == "") { this.identifier = "None" }
     //If 'opposed field' is chosen, use script divided by half
     if(this.fieldSelect == "Opposed") { this.script = String(Number(this.script)/2)}
+
+    if(this.treatSite == "") { this.treatSite = "None" }
 
     this.scp = String(this.calculateSCP())
 

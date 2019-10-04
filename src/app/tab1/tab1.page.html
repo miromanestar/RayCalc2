@@ -29,15 +29,15 @@
         <ion-list-header>
             <ion-label>Resources</ion-label>
         </ion-list-header>
-        <ion-item href="https://sites.google.com/view/raycalc/home">
+        <ion-item button="true" (click)="openInApp('https://sites.google.com/view/raycalc/home')">
             <ion-icon slot="start" color="medium" name="book"></ion-icon>
             <ion-label>RayCalc FAQ</ion-label>
         </ion-item>
-        <ion-item href="https://docs.google.com/forms/d/e/1FAIpQLSeDoR3JJOKJZvcsDvOYMcrn4JOfZgYgWlriobIT4yFiPmE6NQ/viewform">
+        <ion-item button="true" (click)="openInApp('https://docs.google.com/forms/d/e/1FAIpQLSeDoR3JJOKJZvcsDvOYMcrn4JOfZgYgWlriobIT4yFiPmE6NQ/viewform')">
             <ion-icon slot="start" color="medium" name="build"></ion-icon>
             <ion-label>Report a Bug</ion-label>
         </ion-item>
-        <ion-item href="https://docs.google.com/forms/d/e/1FAIpQLSc7Lt6_qq2z_7HcFqP2ayxSebBA4QWw4l8RY_iJf3HFGzcY6g/viewform">
+        <ion-item button="true" (click)="openInApp('https://docs.google.com/forms/d/e/1FAIpQLSc7Lt6_qq2z_7HcFqP2ayxSebBA4QWw4l8RY_iJf3HFGzcY6g/viewform')">
             <ion-icon slot="start" color="medium" name="send"></ion-icon>
             <ion-label>Request a Feature</ion-label>
         </ion-item>
