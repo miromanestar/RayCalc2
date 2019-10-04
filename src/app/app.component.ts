@@ -21,10 +21,31 @@ export class AppComponent {
     private theme: ThemeService
 
   ) {
-    this.storageService.getTheme().then(theme => {
-      if(theme == 'enabled') { this.enableDark() } else { this.enableLight(); }
+    this.storageService.getSys().then(sys => {
+      if(sys == true) { 
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
+        if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
+      } else {
+        this.storageService.getTheme().then(theme => {
+          if(theme == 'enabled') { this.enableDark() } else { this.enableLight(); }
+        })
+      }
     })
+
     this.initializeApp();
+  }
+
+  themeControl(enabled: boolean) {
+    this.storageService.getSys().then(sys => {
+      if(sys == true) { 
+        if(enabled) { this.enableDark() } else { this.enableLight() }
+      } else {
+        this.storageService.getTheme().then(theme => {
+          if(theme == 'enabled') { this.enableDark() } else { this.enableLight(); }
+        })
+      }
+    })
   }
 
   enableDark() {

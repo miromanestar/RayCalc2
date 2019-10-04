@@ -17,9 +17,25 @@ export class SettingsPage {
   confirmation = "";
   themeChoice = "";
   darkModeEnabled = false;
+  useSystemSettings = false;
 
   constructor(public nav:NavController, public modalController:ModalController, private storageService: StorageService, private pickerCtrl: PickerController, private theme: ThemeService) { 
     this.loadSettings();
+  }
+
+  useSystem(enabled: boolean) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    if(enabled) {
+      this.storageService.setSys(enabled).then(sys => {
+        console.log(sys)
+      });
+      if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
+    } else {
+      this.storageService.setSys(enabled).then(sys => {
+        console.log(sys)
+      });
+      if(this.darkModeEnabled) { this.enableDark() } else { this.enableLight() }
+    }
   }
 
   enableDark() {
@@ -52,13 +68,13 @@ export class SettingsPage {
       this.storageService.setTheme(this.themeChoice).then(theme => {
         console.log(theme)
       });
-      this.enableDark();
+      if(this.useSystemSettings == false) { this.enableDark(); }
     } else {
       this.themeChoice = 'disabled'
       this.storageService.setTheme(this.themeChoice).then(theme => {
         console.log(theme)
       });
-      this.enableLight();
+      if(this.useSystemSettings == false) { this.enableLight(); }
     }
   }
 
@@ -79,6 +95,9 @@ export class SettingsPage {
     });
     this.storageService.getTheme().then(theme => {
       if(theme) { this.themeChoice = theme; if(theme == "enabled") {this.darkModeEnabled = true }} else {  this.darkModeEnabled = false }
+    })
+    this.storageService.getSys().then(sys => {
+      if(sys) { this.useSystemSettings = sys } else {  this.useSystemSettings = false }
     })
   }
 
