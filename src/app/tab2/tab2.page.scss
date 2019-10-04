@@ -5,9 +5,3 @@
 .card-content {
     padding-top: 15px;
 }
-
-@media (prefers-color-scheme: dark) {
-    ion-card {
-        background: var(--ion-card-background) !important;
-    }
-}

@@ -76,12 +76,6 @@
  * -------------------------------------------
  */
 
-@media (prefers-color-scheme: dark) {
-    .sc-ion-card-ios-h {
-        background: var(--ion-card-background) !important;
-    }
-}
-
 body.dark-theme {
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66, 140, 255;
@@ -137,6 +131,14 @@ body.dark-theme {
     --ion-color-light-contrast-rgb: 255, 255, 255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+    --dataview-table-odd: #1e2023;
+
+
+    @media (prefers-color-scheme: dark) {
+        ion-card {
+            background: var(--ion-card-background) !important;
+        }
+    }
 }
 
 
@@ -146,6 +148,24 @@ body.dark-theme {
 */
 
 .ios body.dark {
+    ion-card-content {
+        background: var(--ion-card-background);
+    }
+    ion-card-header {
+        background: var(--ion-card-background);
+    }
+    ion-card {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-md-h {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-ios-h {
+        background: var(--ion-card-background);
+    }
+    .formula-img {
+        filter: invert(100%) sepia(89%) saturate(0%) hue-rotate(355deg) brightness(106%) contrast(101%);
+    }
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0, 0, 0;
     --ion-text-color: #ffffff;
@@ -173,6 +193,8 @@ body.dark-theme {
     --ion-item-background: #000000 //#1c1c1c;
     --ion-item-background-activated: #313131;
     --ion-card-background: #1c1c1c;
+    --dataview-table-odd: #1e2023;
+
 }
 
 
@@ -180,6 +202,27 @@ body.dark-theme {
 * Material Design Dark Theme
 * -------------------------------------------
 */
+
+@media (prefers-color-scheme: dark) {
+    ion-card-content {
+        background: var(--ion-card-background);
+    }
+    ion-card-header {
+        background: var(--ion-card-background);
+    }
+    ion-card {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-md-h {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-ios-h {
+        background: var(--ion-card-background);
+    }
+    .formula-img {
+        filter: invert(100%) sepia(89%) saturate(0%) hue-rotate(355deg) brightness(106%) contrast(101%);
+    }
+}
 
 .md body.dark {
     --ion-background-color: #121212;
@@ -206,6 +249,8 @@ body.dark-theme {
     --ion-color-step-850: #dbdbdb;
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
-    --ion-item-background: #121212 //#1A1B1E;
-    --ion-card-background: #1A1B1E
+    --ion-item-background: #121212; //#1A1B1E;
+    --ion-card-background: #1A1B1E;
+    --dataview-table-odd: #1e2023;
+
 }
