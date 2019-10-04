@@ -13,19 +13,7 @@ import { ThemeService } from '../services/theme.service';
 })
 export class Tab1Page {
 
-  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser, private theme: ThemeService, private storageService: StorageService) {
-    this.storageService.getTheme().then(theme => {
-     if(theme == 'enabled') { this.enableDark() } else { this.enableLight() }
-    })
-  }
-
-  enableDark() {
-    this.theme.enableDark();
-  }
-
-  enableLight() {
-    this.theme.enableLight();
-  }
+  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser, private theme: ThemeService, private storageService: StorageService) {}
 
   async presentModal() {
     const modal = await this.modalController.create({
