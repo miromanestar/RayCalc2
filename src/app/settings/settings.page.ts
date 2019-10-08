@@ -23,7 +23,7 @@ export class SettingsPage {
 
   checkValue(selection: string) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    if(selection == null) {selection = "mimic" }
+    if(selection == null) { selection = "mimic" }
     this.storageService.setTheme(selection).then(selection => { 
       console.log(selection)
       if(selection != null) {
@@ -78,7 +78,7 @@ export class SettingsPage {
       if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
     this.storageService.getTheme().then(theme => {
-      if(!theme) { this.themeChoice = theme } else { this.themeChoice = 'mimic' }
+      if(theme) { this.themeChoice = theme } else { this.themeChoice = 'mimic' }
     })
   }
 

@@ -23,7 +23,7 @@ export class ThemeService {
 
   enableLight() {
     this.renderer.removeClass(this.document.body, 'dark')
-    this.statusBar.styleDefault();
+    this.statusBar.styleLightContent();
     Keyboard.setKeyboardStyle('light')
   }
 }
