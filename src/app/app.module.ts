@@ -19,7 +19,7 @@ import { DataviewpopoverComponent } from './dataviewpopover/dataviewpopover.comp
 @NgModule({
   declarations: [AppComponent, DataviewpopoverComponent],
   entryComponents: [DataviewpopoverComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot({scrollPadding: false, scrollAssist: false}), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,

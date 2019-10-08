@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 declare var Keyboard: any;
+
 @Injectable({
   providedIn: 'root'
 })
