@@ -3,6 +3,11 @@
         <ion-title>
             RayCalc 2.0
         </ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="presentModal()">
+                <ion-icon name="settings" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -41,9 +46,12 @@
             <ion-icon slot="start" color="medium" name="send"></ion-icon>
             <ion-label>Request a Feature</ion-label>
         </ion-item>
+        <!-- Old settings button... I moved it to the top
         <ion-item (click)="presentModal()" button="true">
             <ion-icon slot="start" color="medium" name="settings"></ion-icon>
             <ion-label>Settings</ion-label>
         </ion-item>
+        -->
     </ion-list>
+   <p style="text-align: center; font-size: 0.8em">Copyright &copy; {{ date| date: 'yyyy' }} Miro Manestar. All rights reserved.</p>
 </ion-content>

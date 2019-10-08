@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { StorageService } from './services/storage.service';
-import { TabsPage } from './tabs/tabs.page';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +16,11 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storageService: StorageService,
-    private theme: ThemeService
+    private theme: ThemeService,
 
   ) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
     this.storageService.getSys().then(sys => {
       if(sys == true) { 
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -58,9 +58,11 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
       this.statusBar.styleDefault();
       this.statusBar.overlaysWebView(true);
-      //this.statusBar.show();
+      this.statusBar.show();
       this.splashScreen.hide();
     });
   }

@@ -13,6 +13,8 @@ import { ThemeService } from '../services/theme.service';
 })
 export class Tab1Page {
 
+  date = new Date();
+  
   constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser, private theme: ThemeService, private storageService: StorageService) {}
 
   async presentModal() {

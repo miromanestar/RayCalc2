@@ -11,7 +11,11 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <preference name="ScrollEnabled" value="false" />
+    <preference name="ScrollEnabled" value="true" />
+    <preference name="KeyboardAppearanceDark" value="true" />
+    <preference name="KeyboardResize" value="true" />
+    <preference name="KeyboardResizeMode" value="native" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="StatusBarStyle" value="default" />
@@ -99,5 +103,4 @@
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
-    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
 </widget>

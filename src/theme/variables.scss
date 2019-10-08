@@ -141,6 +141,9 @@ body.dark-theme {
         ion-card {
             background: var(--ion-card-background) !important;
         }
+        item.ios.item-lines-none in-list ion-focusable.hydrated {
+            background: #000;
+        }
     }
 }
 
@@ -168,6 +171,9 @@ body.dark-theme {
     }
     .formula-img {
         filter: invert(100%) sepia(89%) saturate(0%) hue-rotate(355deg) brightness(106%) contrast(101%);
+    }
+    .item.hydrated {
+        background: #000;
     }
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0, 0, 0;
@@ -228,6 +234,24 @@ body.dark-theme {
 }
 
 .md body.dark {
+    ion-card-content {
+        background: var(--ion-card-background);
+    }
+    ion-card-header {
+        background: var(--ion-card-background);
+    }
+    ion-card {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-md-h {
+        background: var(--ion-card-background);
+    }
+    .sc-ion-card-ios-h {
+        background: var(--ion-card-background);
+    }
+    .formula-img {
+        filter: invert(100%) sepia(89%) saturate(0%) hue-rotate(355deg) brightness(106%) contrast(101%);
+    }
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18, 18, 18;
     --ion-text-color: #ffffff;

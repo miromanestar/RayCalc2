@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { Papa } from 'ngx-papaparse';
+import { ModalController } from '@ionic/angular';
+import { SettingsPage } from '../settings/settings.page';
 
 @Component({
   selector: 'app-tab2',
@@ -9,8 +10,18 @@ import { Papa } from 'ngx-papaparse';
 })
 export class Tab2Page {
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public modalController: ModalController) { }
 
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SettingsPage
+    });
+    return await modal.present();
+  }
+
+  goToInputPage(calcType: String) {
+    const navigationExtras : NavigationExtras = { state: { calcSelect: calcType }};
+    this.router.navigate(['/tabs/tab1/input-page'], navigationExtras);
   }
 
   viewData(selection: string) {

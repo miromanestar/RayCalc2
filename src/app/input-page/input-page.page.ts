@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
-import { NgStyle } from '@angular/common';
-import { ResultsPage } from '../results/results.page';
 import { StorageService } from '../services/storage.service';
 import { isNumber } from 'util';
 
@@ -12,7 +10,7 @@ import { isNumber } from 'util';
   templateUrl: './input-page.page.html',
   styleUrls: ['./input-page.page.scss'],
 })
-export class InputPagePage implements OnInit {
+export class InputPagePage {
 
   //Title HTML variable
   WhichSelected = "ERROR: Data Failed to Pass";
@@ -96,7 +94,7 @@ export class InputPagePage implements OnInit {
     if(calcSelect =='sad') { this.WhichSelected = "SAD Calculation"}
     this.calcSelect = calcSelect;
   }
-
+  
   //Picker selection, takes string input to determine which values to display
   async openPicker(selection: string) {
     if(this.calcSelect == "sad" || selection == 'energy') {
@@ -235,7 +233,4 @@ export class InputPagePage implements OnInit {
     if(selection == "width" && this.width == "Required") { this.width = ""; this.widthStyle = {'color': 'inherit'} }
     if(selection == "field" && this.fieldSelect == "Required") { this.fieldSelect = ""; this.fieldStyle = {'color': 'inherit'} }
    }
-
-  ngOnInit() {
-  }
 }
