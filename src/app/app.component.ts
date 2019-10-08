@@ -34,11 +34,17 @@ export class AppComponent {
 
   themeControl() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
     this.storageService.getTheme().then(theme => {
-      if(theme == null) { this.storageService.setTheme('mimc') }
-      if(theme == 'mimic') { if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }}
-      if(theme == 'light') { this.enableLight() }
-      if(theme == 'dark') { this.enableDark() }
+      if(theme == null) { 
+        this.storageService.setTheme('mimc');
+        if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
+        prefersDark.addListener((mediaQuery) => this.themeControl());  
+      } else {
+        if(theme == 'mimic') { if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }}
+        if(theme == 'light') { this.enableLight() }
+        if(theme == 'dark') { this.enableDark() }
+      }
     })
   }
 
