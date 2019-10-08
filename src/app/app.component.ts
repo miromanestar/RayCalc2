@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { StorageService } from './services/storage.service';
 
+declare var Keyboard: any;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -64,6 +65,10 @@ export class AppComponent {
       this.statusBar.overlaysWebView(true);
       this.statusBar.show();
       this.splashScreen.hide();
+
+      Keyboard.setResizeMode('native')
+      Keyboard.disableScroll(false)
+      Keyboard.hideFormAccessoryBar
     });
   }
 }
