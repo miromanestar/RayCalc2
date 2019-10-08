@@ -15,27 +15,27 @@ export class SettingsPage {
   name = "";
   iso = "";
   confirmation = "";
-  themeChoice = "";
-  darkModeEnabled = false;
-  useSystemSettings = false;
+  themeChoice = "mimic";
 
   constructor(public nav:NavController, public modalController:ModalController, private storageService: StorageService, private pickerCtrl: PickerController, private theme: ThemeService) { 
     this.loadSettings();
   }
 
-  useSystem(enabled: boolean) {
+  checkValue(selection: string) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    if(enabled) {
-      this.storageService.setSys(enabled).then(sys => {
-        console.log(sys)
-      });
-      if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
-    } else {
-      this.storageService.setSys(enabled).then(sys => {
-        console.log(sys)
-      });
-      if(this.darkModeEnabled) { this.enableDark() } else { this.enableLight() }
-    }
+    if(selection == null) {selection = "mimic" }
+    this.storageService.setTheme(selection).then(selection => { 
+      console.log(selection)
+      if(selection != null) {
+        this.themeChoice = selection
+
+        if(selection == "mimic") {
+          if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
+        }
+        if(selection == "light") { this.enableLight(); }
+        if(selection == "dark") { this.enableDark(); }
+      }
+    });
   }
 
   enableDark() {
@@ -62,22 +62,6 @@ export class SettingsPage {
     })
   }
 
-  toggleTheme(darkmode: boolean) {
-    if(darkmode) {
-      this.themeChoice = 'enabled'
-      this.storageService.setTheme(this.themeChoice).then(theme => {
-        console.log(theme)
-      });
-      if(this.useSystemSettings == false) { this.enableDark(); }
-    } else {
-      this.themeChoice = 'disabled'
-      this.storageService.setTheme(this.themeChoice).then(theme => {
-        console.log(theme)
-      });
-      if(this.useSystemSettings == false) { this.enableLight(); }
-    }
-  }
-
   ngOnInit() {
     this.loadSettings();
   }
@@ -94,10 +78,7 @@ export class SettingsPage {
       if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
     this.storageService.getTheme().then(theme => {
-      if(theme) { this.themeChoice = theme; if(theme == "enabled") {this.darkModeEnabled = true }} else {  this.darkModeEnabled = false }
-    })
-    this.storageService.getSys().then(sys => {
-      if(sys) { this.useSystemSettings = sys } else {  this.useSystemSettings = false }
+      if(theme != null || theme != '') { this.themeChoice = theme } else { this.themeChoice = 'mimic' }
     })
   }
 
@@ -109,9 +90,6 @@ export class SettingsPage {
      this.storageService.setISO(this.iso).then(iso => {
        console.log(iso)
      });
-     this.storageService.setTheme(this.themeChoice).then(theme => {
-      console.log(theme)
-    });
   }
 
   ionViewWillEnter() {

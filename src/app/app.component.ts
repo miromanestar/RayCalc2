@@ -25,35 +25,20 @@ export class AppComponent {
     })
 
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
-    this.storageService.getSys().then(sys => {
-      if(sys == true) { 
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
-        if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
-      } else if(sys == null) { 
-        this.storageService.setSys(true).then(sys => {
-          this.themeControl(sys);
-        })
-      } else {
-        this.storageService.getTheme().then(theme => {
-          if(theme == 'enabled') { this.enableDark() } else { this.enableLight(); }
-        })
-      }
-    })
+    prefersDark.addListener((mediaQuery) => this.themeControl());
+    this.themeControl();
+    
 
     this.initializeApp();
   }
 
-  themeControl(enabled: boolean) {
-    this.storageService.getSys().then(sys => {
-      if(sys == true) { 
-        if(enabled) { this.enableDark() } else { this.enableLight() }
-      } else {
-        this.storageService.getTheme().then(theme => {
-          if(theme == 'enabled') { this.enableDark() } else { this.enableLight(); }
-        })
-      }
+  themeControl() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.storageService.getTheme().then(theme => {
+      if(theme == null) { this.storageService.setTheme('mimc') }
+      if(theme == 'mimic') { if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }}
+      if(theme == 'light') { this.enableLight() }
+      if(theme == 'dark') { this.enableDark() }
     })
   }
 
@@ -68,7 +53,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-      prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
+      prefersDark.addListener((mediaQuery) => this.themeControl());
       this.statusBar.styleLightContent();
       this.statusBar.overlaysWebView(true);
       this.statusBar.show();

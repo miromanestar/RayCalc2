@@ -32,7 +32,6 @@ const HIST_KEY = 'hist-key'
 const NAME_KEY = 'name-key'
 const ISO_KEY = 'iso-key'
 const THEME_KEY = 'theme-key'
-const SYS_KEY = 'sys-key'
 
 @Injectable({
   providedIn: 'root'
@@ -40,14 +39,6 @@ const SYS_KEY = 'sys-key'
 export class StorageService {
 
   constructor(private storage: Storage) { }
-
-  getSys(): Promise<boolean> {
-    return this.storage.get(SYS_KEY)
-  }
-
-  setSys(enabled: boolean): Promise<boolean> {
-    return this.storage.set(SYS_KEY, enabled)
-  }
 
   getTheme(): Promise<string> {
     return this.storage.get(THEME_KEY)

@@ -16,14 +16,26 @@
         <ion-label class="setting-label" position="stacked">ISO</ion-label>
         <ion-input inputmode="none" readonly="true" [(ngModel)]="iso" (click)="openPicker()" clearInput="true" placeholder="Eg. 80 or 100" value="100"></ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label>Use System Dark Mode</ion-label>
-        <ion-toggle [(ngModel)]="useSystemSettings" checked="{{ useSystemSettings }}" (ionChange)="useSystem(useSystemSettings)"></ion-toggle>
-    </ion-item>
-    <ion-item>
-        <ion-label>Dark Mode</ion-label>
-        <ion-toggle [(ngModel)]="darkModeEnabled" checked="{{ darkModeEnabled }}" (ionChange)="toggleTheme(darkModeEnabled)"></ion-toggle>
-    </ion-item>
+    <ion-radio-group [(ngModel)]='themeChoice' (ionSelect)="checkValue($event.detail.value)">
+        <ion-list-header>
+            <ion-label class="setting-label">Appearance</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+            <ion-label>Mimic System</ion-label>
+            <ion-radio value="mimic" checked></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Light</ion-label>
+            <ion-radio value="light"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Dark</ion-label>
+            <ion-radio value="dark"></ion-radio>
+        </ion-item>
+    </ion-radio-group>
     <ion-button expand="block " style="margin-top: 30px; " (click)="saveSettings()">Save</ion-button>
     <ion-text color="success ">
         <p class="saved-msg " style="text-align: center; ">{{ confirmation }}</p>
