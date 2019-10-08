@@ -54,10 +54,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       prefersDark.addListener((mediaQuery) => this.themeControl());
-      this.statusBar.styleLightContent();
       this.statusBar.overlaysWebView(true);
       this.statusBar.show();
       this.splashScreen.hide();
+      this.statusBar.styleLightContent();
 
       Keyboard.setResizeMode('native')
       Keyboard.setKeyboardStyle('light')

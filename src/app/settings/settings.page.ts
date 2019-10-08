@@ -78,7 +78,7 @@ export class SettingsPage {
       if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
     this.storageService.getTheme().then(theme => {
-      if(theme != null || theme != '') { this.themeChoice = theme } else { this.themeChoice = 'mimic' }
+      if(!theme) { this.themeChoice = theme } else { this.themeChoice = 'mimic' }
     })
   }
 
