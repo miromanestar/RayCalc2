@@ -16,7 +16,7 @@
         <ion-label class="setting-label" position="stacked">ISO</ion-label>
         <ion-input inputmode="none" readonly="true" [(ngModel)]="iso" (click)="openPicker()" clearInput="true" placeholder="Eg. 80 or 100" value="100"></ion-input>
     </ion-item>
-    <ion-radio-group [(ngModel)]='themeChoice' (ionSelect)="checkValue($event.detail.value)">
+    <ion-radio-group [(ngModel)]="themeChoice" (ionSelect)="checkValue($event.detail.value)">
         <ion-list-header>
             <ion-label class="setting-label">Appearance</ion-label>
         </ion-list-header>
