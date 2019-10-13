@@ -20,13 +20,9 @@ export class AppComponent {
     private theme: ThemeService,
 
   ) {
-    window.addEventListener("keyboardDidShow", () => {
-      document.activeElement.scrollIntoView(true);
-    })
-
+    this.themeControl(false);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
-    this.themeControl(false);
     
 
     this.initializeApp();
@@ -38,11 +34,10 @@ export class AppComponent {
 
     this.storageService.getTheme().then(theme => {
       if(theme == null) { 
-        this.storageService.setTheme('mimc');
         if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
         prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));  
       } else {
-        if(theme == 'mimic') { if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }}
+        if(theme == 'mimic') { if(prefersDark.matches) { this.enableDark() } else { this.enableLight(); this.statusBar.styleDefault(); }}
         if(theme == 'light') { this.enableLight() }
         if(theme == 'dark') { this.enableDark() }
       }
@@ -64,11 +59,10 @@ export class AppComponent {
       this.statusBar.overlaysWebView(true);
       this.statusBar.show();
       this.splashScreen.hide();
-      this.statusBar.styleLightContent();
 
       Keyboard.setResizeMode('native')
       Keyboard.setKeyboardStyle('light')
-      Keyboard.disableScroll(false)
+      Keyboard.disableScroll(true)
       Keyboard.hideFormAccessoryBar(false)
     });
   }

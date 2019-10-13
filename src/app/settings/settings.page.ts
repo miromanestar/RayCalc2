@@ -4,6 +4,8 @@ import { StorageService } from '../services/storage.service';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { ThemeService } from '../services/theme.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 
 @Component({
   selector: 'app-settings',
@@ -15,9 +17,14 @@ export class SettingsPage {
   name = "";
   iso = "";
   confirmation = "";
-  themeChoice = "mimic";
+  themeChoice = "";
 
-  constructor(public nav:NavController, public modalController:ModalController, private storageService: StorageService, private pickerCtrl: PickerController, private theme: ThemeService) { 
+  constructor(public nav:NavController, 
+    public modalController:ModalController, 
+    private storageService: StorageService, 
+    private pickerCtrl: PickerController, 
+    private theme: ThemeService,
+    private statusBar: StatusBar) { 
     this.loadSettings();
   }
 
@@ -30,12 +37,22 @@ export class SettingsPage {
         this.themeChoice = selection
 
         if(selection == "mimic") {
-          if(prefersDark.matches) { this.enableDark() } else { this.enableLight() }
+          if(prefersDark.matches) { this.enableDark() } else { this.enableLight();  this.statusBar.styleDefault() }
         }
-        if(selection == "light") { this.enableLight(); }
+        if(selection == "light") { this.enableLight(); this.statusBar.styleDefault() }
         if(selection == "dark") { this.enableDark(); }
       }
     });
+  }
+
+  test() {
+    this.statusBar.styleDefault();
+  }
+  test1() {
+    this.statusBar.styleLightContent();
+  }
+  test2() {
+    this.statusBar.styleBlackOpaque();
   }
 
   enableDark() {
@@ -78,7 +95,11 @@ export class SettingsPage {
       if(iso) {this.iso = iso; } else { this.iso = "100" }
     });
     this.storageService.getTheme().then(theme => {
-      if(theme) { this.themeChoice = theme; console.log(this.themeChoice) } else { this.themeChoice = "mimic" }
+      if(theme) { this.themeChoice = theme; console.log(this.themeChoice) 
+      } else { 
+        this.themeChoice = "mimic" 
+        this.storageService.setTheme("mimic").then(theme => { console.log("Saved" + theme)})
+      }
     })
   }
 
