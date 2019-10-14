@@ -56,7 +56,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
-      this.statusBar.overlaysWebView(true);
+      this.statusBar.overlaysWebView(false);
       this.statusBar.show();
       this.splashScreen.hide();
 
