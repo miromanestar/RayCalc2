@@ -17,13 +17,13 @@ export class ThemeService {
 
   enableDark() {
     this.renderer.addClass(this.document.body, 'dark')
-    this.statusBar.styleBlackOpaque();
+    this.statusBar.styleBlackTranslucent();
     Keyboard.setKeyboardStyle('dark')
   }
 
   enableLight() {
     this.renderer.removeClass(this.document.body, 'dark')
-    this.statusBar.styleLightContent();
+    this.statusBar.styleDefault();
     Keyboard.setKeyboardStyle('light')
   }
 }
