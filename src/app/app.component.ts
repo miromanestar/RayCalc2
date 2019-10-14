@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -99,9 +99,5 @@ export class AppComponent implements OnInit {
         // Scroll not necessary.
         ionapp.style["margin-bottom"] = "0px";
     });
-  }
-
-  ngOnInit() {
-
   }
 }
