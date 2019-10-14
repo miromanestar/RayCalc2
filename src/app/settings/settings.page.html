@@ -10,11 +10,11 @@
 <ion-content>
     <ion-item>
         <ion-label class="setting-label" position="stacked">Dosimetrist Name</ion-label>
-        <ion-input [(ngModel)]="name" clearInput="true" placeholder="Please enter your name"></ion-input>
+        <ion-input [(ngModel)]="name" clearInput="true" placeholder="Please enter your name" (ionBlur)="saveSettings()"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label class="setting-label" position="stacked">ISO</ion-label>
-        <ion-input inputmode="none" readonly="true" [(ngModel)]="iso" (click)="openPicker()" clearInput="true" placeholder="Eg. 80 or 100" value="100"></ion-input>
+        <ion-input inputmode="none" readonly="true" [(ngModel)]="iso" (click)="openPicker()" (ionBlur)="saveSettings()" clearInput="true" placeholder="Eg. 80 or 100" value="100"></ion-input>
     </ion-item>
     <ion-radio-group [(ngModel)]="themeChoice" (ionSelect)="checkValue($event.detail.value)">
         <ion-list-header>
@@ -36,11 +36,13 @@
             <ion-radio value="dark"></ion-radio>
         </ion-item>
     </ion-radio-group>
+    <!--
     <ion-button expand="block " style="margin-top: 30px; " (click)="saveSettings()">Save</ion-button>
+    
     <ion-button expand="block " style="margin-top: 30px; " (click)="test()">default</ion-button>
     <ion-button expand="block " style="margin-top: 30px; " (click)="test1()">light</ion-button>
     <ion-button expand="block " style="margin-top: 30px; " (click)="test2()">black</ion-button>
-
+    -->
 
     <ion-text color="success ">
         <p class="saved-msg " style="text-align: center; ">{{ confirmation }}</p>

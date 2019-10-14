@@ -106,7 +106,7 @@ export class SettingsPage {
   saveSettings() {
     this.storageService.setName(this.name).then(name => {
       console.log(name)
-      this.confirmation = "Settings saved successfully!"
+      //this.confirmation = "Settings saved successfully!"
      });
      this.storageService.setISO(this.iso).then(iso => {
        console.log(iso)
