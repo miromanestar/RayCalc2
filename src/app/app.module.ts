@@ -7,7 +7,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { IonicStorageModule } from '@ionic/storage';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +23,6 @@ import { DataviewpopoverComponent } from './dataviewpopover/dataviewpopover.comp
     SplashScreen,
     NativeStorage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    InAppBrowser,
   ],
   bootstrap: [AppComponent]
 })
