@@ -98,6 +98,6 @@ export class AppComponent implements AfterViewInit {
         // Move ion-app down again
         // Scroll not necessary.
         ionapp.style["margin-bottom"] = "0px";
-    });
+    }); //Test
   }
 }
