@@ -111,9 +111,9 @@ export class ResultsPage implements OnInit {
     if(today.getHours() > 12) {
       hour = today.getHours() - 12;
       ampm = "PM";
-    } else { hour = today.getHours(); ampm = "AM"}
+    } else { if(today.getHours() == 0) { hour = 12 } else { hour = today.getHours(); } ampm = "AM"}
     this.date = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + " at " + hour + ":" + today.getMinutes() + " " + ampm;
-
+    
      //Set name
      this.storageService.getName().then(name => {
       if(name) { this.name = name; } else { this.name = "Unknown" }
