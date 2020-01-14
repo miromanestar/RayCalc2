@@ -17,7 +17,7 @@ export class ThemeService {
 
   enableDark() {
     this.renderer.addClass(this.document.body, 'dark')
-    this.statusBar.styleBlackTranslucent();
+    this.statusBar.styleLightContent();
     Keyboard.setKeyboardStyle('dark')
   }
 
