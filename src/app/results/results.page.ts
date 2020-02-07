@@ -108,6 +108,10 @@ export class ResultsPage implements OnInit {
     let today = new Date();
     let hour: any;
     let ampm: string;
+    let minutes: string;
+    if(today.getMinutes() < 10) {
+      minutes = "0" + today.getMinutes();
+    }
     if(today.getHours() > 12) {
       hour = today.getHours() - 12;
       ampm = "PM";
