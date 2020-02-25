@@ -18,5 +18,12 @@
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000"
     }
+  },
+  "plugins": {
+    "Keyboard": {
+      "resize": "ionic",
+      "style": "dark",
+      "setAccessoryBarVisible": "true"
+    }
   }
 }

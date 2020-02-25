@@ -4,8 +4,9 @@ import { StorageService } from '../services/storage.service';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { ThemeService } from '../services/theme.service';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Plugins, StatusBarStyle } from '@capacitor/core';
 
+const { StatusBar } = Plugins;
 
 @Component({
   selector: 'app-settings',
@@ -23,8 +24,7 @@ export class SettingsPage {
     public modalController:ModalController, 
     private storageService: StorageService, 
     private pickerCtrl: PickerController, 
-    private theme: ThemeService,
-    private statusBar: StatusBar) { 
+    private theme: ThemeService) { 
     this.loadSettings();
   }
 
@@ -37,22 +37,22 @@ export class SettingsPage {
         this.themeChoice = selection
 
         if(selection == "mimic") {
-          if(prefersDark.matches) { this.enableDark() } else { this.enableLight();  this.statusBar.styleDefault() }
+          if(prefersDark.matches) { this.enableDark() } else { this.enableLight();  StatusBar.setStyle({ style: StatusBarStyle.Light }); }
         }
-        if(selection == "light") { this.enableLight(); this.statusBar.styleDefault() }
+        if(selection == "light") { this.enableLight(); StatusBar.setStyle({ style: StatusBarStyle.Light }); }
         if(selection == "dark") { this.enableDark(); }
       }
     });
   }
 
   test() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Light });;
   }
   test1() {
-    this.statusBar.styleLightContent();
+    StatusBar.setStyle({ style: StatusBarStyle.Dark });
   }
   test2() {
-    this.statusBar.styleBlackOpaque();
+    StatusBar.setStyle({ style: StatusBarStyle.Dark });
   }
 
   enableDark() {

@@ -4,6 +4,12 @@ import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { StorageService } from '../services/storage.service';
 import { isNumber } from 'util';
+import { Plugins, KeyboardInfo, HapticsImpactStyle } from '@capacitor/core';
+import { IonContent } from '@ionic/angular'
+import { ViewChild, AfterViewInit } from '@angular/core';
+
+const { Keyboard } = Plugins;
+const { Haptics } = Plugins;
 
 @Component({
   selector: 'app-input-page',
@@ -11,6 +17,7 @@ import { isNumber } from 'util';
   styleUrls: ['./input-page.page.scss'],
 })
 export class InputPagePage {
+  
 
   //Title HTML variable
   WhichSelected = "ERROR: Data Failed to Pass";
@@ -53,6 +60,16 @@ export class InputPagePage {
      };
     
     if(state.importData != null) { this.setImportData(state.importData) } else { this.setCalcType(state.calcSelect); }
+  }
+
+  @ViewChild(IonContent, { static: true }) content: IonContent;
+  ngAfterViewInit() {
+    Keyboard.addListener('keyboardWillShow', (info: KeyboardInfo) => {
+      setTimeout( () =>  this.content.scrollToBottom(100), 200  )             
+    });
+    Keyboard.addListener('keyboardDidShow', (info: KeyboardInfo) => {
+      setTimeout( () =>  this.content.scrollToBottom(100), 200  )  
+  }); 
   }
 
   setImportData(importData: any) {
@@ -114,8 +131,9 @@ export class InputPagePage {
         }
       }
       let picker = await this.pickerCtrl.create(opts);
-      picker.present();
-      picker.onDidDismiss().then(async data => { 
+      picker.present()
+      picker.onDidDismiss().then(async data => {
+      this.hapticsSelectionChanged()  
       let col = await picker.getColumn('select');
       if(col.options[col.selectedIndex].text != "Select an option" && col.options[col.selectedIndex].value != "15" && col.options[col.selectedIndex].value != "10") { //Disable 15MV energy level due to lack of data
         if (selection == "field") { this.fieldSelect = col.options[col.selectedIndex].value; } else
@@ -123,6 +141,10 @@ export class InputPagePage {
       }
       });
     }
+  }
+
+  hapticsSelectionChanged() {
+    Haptics.selectionChanged();
   }
 
   changeISO(selection: string) {
@@ -233,4 +255,5 @@ export class InputPagePage {
     if(selection == "width" && this.width == "Required") { this.width = ""; this.widthStyle = {'color': 'inherit'} }
     if(selection == "field" && this.fieldSelect == "Required") { this.fieldSelect = ""; this.fieldStyle = {'color': 'inherit'} }
    }
+
 }
