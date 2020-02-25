@@ -1,4 +1,4 @@
-# RayCalc2
+# RayCalc2 <h5>miroimanestar@gmail.com</h5>
 <p>A cross-platform radiation dosimetry app for emergency situations!</p>
 
 <strong>What is RayCalc?</strong>
