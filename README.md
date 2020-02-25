@@ -1,6 +1,6 @@
 # RayCalc2 
 <h5>Miro Manestar &copy; 2019. All Rights Reserved.</h5>
-<h6>miroimanestar@gmail.com</h6>
+<h5>miroimanestar@gmail.com</h5>
 
 <p>A cross-platform radiation dosimetry app for emergency situations!</p>
 
