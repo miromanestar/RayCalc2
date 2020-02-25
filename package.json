@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "https://ionicframework.com/",
-    "license": "RPL-1.0",
+    "license": "MLP-2.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
