@@ -1,7 +1,8 @@
 {
   "name": "RayCalc2",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular",
   "id": "3eae5fb4"

@@ -1,0 +1,22 @@
+{
+  "appId": "medical.dosimetry.raycalc2",
+  "appName": "RayCalc2",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "true",
+      "KeyboardResize": "true",
+      "KeyboardResizeMode": "native",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "resizeOnFullscreen": "true",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000"
+    }
+  }
+}
