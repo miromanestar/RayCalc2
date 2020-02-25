@@ -3,7 +3,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
 import { SettingsPage } from '../settings/settings.page';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'
 import { ThemeService } from '../services/theme.service';
 
 @Component({
@@ -15,7 +14,7 @@ export class Tab1Page {
 
   date = new Date();
   
-  constructor(public router: Router, public modalController : ModalController, private iab: InAppBrowser, private theme: ThemeService, private storageService: StorageService) {}
+  constructor(public router: Router, public modalController : ModalController, private theme: ThemeService, private storageService: StorageService) {}
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -27,9 +26,5 @@ export class Tab1Page {
   goToInputPage(calcType: String) {
     const navigationExtras : NavigationExtras = { state: { calcSelect: calcType }};
     this.router.navigate(['/tabs/tab1/input-page'], navigationExtras);
-  }
-
-  openInApp(url: string) {
-    this.iab.create(url, '_blank');
   }
 }

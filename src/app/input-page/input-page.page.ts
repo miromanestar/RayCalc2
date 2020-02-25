@@ -110,14 +110,14 @@ export class InputPagePage {
         var opts: PickerOptions = {
           buttons: [ { text: 'Cancel', role: 'cancel' }, { text: 'Done', } ],
           
-          columns: [ { name: 'select', options: [ { text: "Select an option", value: ""}, {text: "6", value: "6"}, {text: "10", value: "10"}, {text: "15 (Inactive)", value: "15"}, {text: "18", value: "18"}] }  ]
+          columns: [ { name: 'select', options: [ { text: "Select an option", value: ""}, {text: "6", value: "6"}, {text: "18", value: "18"}, {text: "10 (Inactive)", value: "10"}, {text: "15 (Inactive)", value: "15"} ] }  ]
         }
       }
       let picker = await this.pickerCtrl.create(opts);
       picker.present();
       picker.onDidDismiss().then(async data => { 
       let col = await picker.getColumn('select');
-      if(col.options[col.selectedIndex].text != "Select an option" && col.options[col.selectedIndex].value != "15") { //Disable 15MV energy level due to lack of data
+      if(col.options[col.selectedIndex].text != "Select an option" && col.options[col.selectedIndex].value != "15" && col.options[col.selectedIndex].value != "10") { //Disable 15MV energy level due to lack of data
         if (selection == "field") { this.fieldSelect = col.options[col.selectedIndex].value; } else
         if (selection == "energy") { this.energySelect = col.options[col.selectedIndex].value; }
       }

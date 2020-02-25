@@ -57,7 +57,7 @@ export class AppComponent implements AfterViewInit {
     this.platform.ready().then(() => {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
-      this.statusBar.overlaysWebView(false);
+      this.statusBar.overlaysWebView(true);
       this.statusBar.show();
       this.splashScreen.hide();
 
@@ -98,6 +98,6 @@ export class AppComponent implements AfterViewInit {
         // Move ion-app down again
         // Scroll not necessary.
         ionapp.style["margin-bottom"] = "0px";
-    });
+    }); //Test
   }
 }
