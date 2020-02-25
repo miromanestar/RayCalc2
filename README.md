@@ -1,18 +1,23 @@
 # RayCalc2
 <p>A cross-platform radiation dosimetry app for emergency situations!</p>
 
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:38px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">What is RayCalc?</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:16px;font-family:&quot;Open Sans&quot;,sans-serif;color:#212121;">RayCalc is a lightweight, simple calculator for radiation dosimetry calculations when on call. Its purpose is not to replace professional software, but to provide a verification solution during emergency situations to aid against human error. The calculator utilizes data tables taken directly from Northside Forsyth hospital, and uses industry-standard formulas, along with some minor interpolation to obtain answers that have been tested to be with a less than 1% error margin.</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;text-align:center;vertical-align:middle;"><strong><span style="font-size:24px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">&nbsp;</span></strong></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:26px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">Can I change the ISO setting?</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:16px;font-family:&quot;Open Sans&quot;,sans-serif;color:#212121;">As of this moment, no. At this moment the ability to change the machine ISO is not possible because of the data used within the calculations. If a need is recognized, this feature will be added.</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;text-align:center;vertical-align:middle;"><strong><span style="font-size:24px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">&nbsp;</span></strong></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:26px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">What about gold-beam data?</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:16px;font-family:&quot;Open Sans&quot;,sans-serif;color:#212121;">The introduction of gold-beam data tables is intended to be implemented in a future date. The benefit of this is that gold-beam data is being widely adopted throughout clinics and hospitals as a standard.&nbsp;</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;text-align:center;vertical-align:middle;"><strong><span style="font-size:24px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">&nbsp;</span></strong></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:26px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">Will you add more calculation types?</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:16px;font-family:&quot;Open Sans&quot;,sans-serif;color:#212121;">It is possible that in the future more calculation types will be added. This feature will be added if there are requests for it.</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;text-align:center;vertical-align:middle;"><strong><span style="font-size:24px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">&nbsp;</span></strong></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:26px;font-family:&quot;Times New Roman&quot;,serif;color:#212121;">Which devices does the app support?</span></p>
-<p style="margin-top:0in;margin-right:0in;margin-bottom:.0001pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,sans-serif;vertical-align:top;"><span style="font-size:16px;font-family:&quot;Open Sans&quot;,sans-serif;color:#212121;">This app is designed using the ionic framework, meaning it supports both iOS and Android and can run locally on Windows, Mac, and Linux via a web browser.</span></p>
+<strong>What is RayCalc?</strong>
+RayCalc is a lightweight, simple calculator for radiation dosimetry calculations when on call. Its purpose is not to replace professional software, but to provide a verification solution during emergency situations to aid against human error. The calculator utilizes data tables taken directly from Northside Forsyth hospital, and uses industry-standard formulas, along with some minor interpolation to obtain answers that have been tested to be with a less than 1% error margin.
+
+
+<strong>Can I change the ISO setting?</strong>
+As of this moment, no. At this moment the ability to change the machine ISO is not possible because of the data used within the calculations. If a need is recognized, this feature will be added.
+
+
+<strong>What about gold-beam data?</strong>
+The introduction of gold-beam data tables is intended to be implemented in a future date. The benefit of this is that gold-beam data is being widely adopted throughout clinics and hospitals as a standard. 
+
+
+<strong>Will you add more calculation types?</strong>
+It is possible that in the future more calculation types will be added. This feature will be added if there are requests for it.
+
+
+<strong>Which devices does the app support?</strong>
+This app is designed using the ionic framework, meaning it supports both iOS and Android and can run locally on Windows, Mac, and Linux via a web browser.
+
 <a href="https://sites.google.com/view/raycalc/home">Click here to learn more!</a>
