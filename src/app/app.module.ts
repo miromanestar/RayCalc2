@@ -12,11 +12,13 @@ import { AppComponent } from './app.component';
 import { SettingsPageModule } from './settings/settings.module'
 import { ResultsPageModule } from './results/results.module';
 import { DataviewpopoverComponent } from './dataviewpopover/dataviewpopover.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, DataviewpopoverComponent],
   entryComponents: [DataviewpopoverComponent],
-  imports: [BrowserModule, IonicModule.forRoot({scrollPadding: false, scrollAssist: false}), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot({scrollPadding: false, scrollAssist: false}), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     SplashScreen,
     NativeStorage,
