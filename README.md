@@ -35,4 +35,4 @@ This app is designed using the ionic framework, meaning it supports both iOS and
 
 
 
-<a href="https://sites.google.com/view/raycalc/home">Click here to learn more!</a>
+<a href="https://faq.raycalc.com">Click here to learn more!</a>
