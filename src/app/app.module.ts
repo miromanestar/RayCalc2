@@ -2,7 +2,7 @@ import { NgModule, Inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, Config } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { IonicStorageModule } from '@ionic/storage';
@@ -18,7 +18,14 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [AppComponent, DataviewpopoverComponent],
   entryComponents: [DataviewpopoverComponent],
-  imports: [BrowserModule, IonicModule.forRoot({scrollPadding: false, scrollAssist: false}), AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [BrowserModule,
+    IonicModule.forRoot( 
+    {
+      scrollPadding: false,
+      scrollAssist: false,
+      swipeBackEnabled: false, //CHANGE TO TRUE FOR iOS BUILDS, FALSE FOR WEB BUILDS
+    }),
+    AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     SplashScreen,
     NativeStorage,
