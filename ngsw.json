@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591295197097,
+  "timestamp": 1591580756636,
   "index": "https://raycalc.com/index.html",
   "assetGroups": [
     {
@@ -215,8 +215,8 @@
         "https://raycalc.com/common-es2015.8692317c29a96ee81ec3.js",
         "https://raycalc.com/common-es5.8692317c29a96ee81ec3.js",
         "https://raycalc.com/index.html",
-        "https://raycalc.com/main-es2015.e7a876795f7a988a1844.js",
-        "https://raycalc.com/main-es5.e7a876795f7a988a1844.js",
+        "https://raycalc.com/main-es2015.e6cb074994d8b3ec1a79.js",
+        "https://raycalc.com/main-es5.e6cb074994d8b3ec1a79.js",
         "https://raycalc.com/polyfills-es2015.d82294eab3776add2aea.js",
         "https://raycalc.com/polyfills-es5.c9cfaeca02f50c170842.js",
         "https://raycalc.com/runtime-es2015.a426ed4d2232edf5b02c.js",
@@ -468,9 +468,9 @@
     "https://raycalc.com/assets/ssdFormulaCalc.svg": "d46c562209a73e4181c6360d1c9aa6ae0b39c795",
     "https://raycalc.com/common-es2015.8692317c29a96ee81ec3.js": "42125fabdfebd478a5bd4dda8a21605adcec0f54",
     "https://raycalc.com/common-es5.8692317c29a96ee81ec3.js": "f442960308bf99b55ffb0dc0815ef6c0fb1f005b",
-    "https://raycalc.com/index.html": "d74585f744597a4f5d6d36f3b6b4b5c56153da6f",
-    "https://raycalc.com/main-es2015.e7a876795f7a988a1844.js": "e7f3a2cfa0bf10de7d5e589db4eb0208544616ab",
-    "https://raycalc.com/main-es5.e7a876795f7a988a1844.js": "7d5cda667c232f29fb665e132b50173d3ef8bd83",
+    "https://raycalc.com/index.html": "8de7616d4961b5f626206fdba9fbfcf5581ecd88",
+    "https://raycalc.com/main-es2015.e6cb074994d8b3ec1a79.js": "5090514c3e898e7d00192a130bb5b168a230c2bb",
+    "https://raycalc.com/main-es5.e6cb074994d8b3ec1a79.js": "ad5153d154c6eaab404f1f3527aa3a9107f39834",
     "https://raycalc.com/polyfills-es2015.d82294eab3776add2aea.js": "3e8e13c20d952ed086f1eec54c0d0bf7cdb34142",
     "https://raycalc.com/polyfills-es5.c9cfaeca02f50c170842.js": "97a35cbf0dcb8ed3bfbd0950d2eb4fe159433b3b",
     "https://raycalc.com/runtime-es2015.a426ed4d2232edf5b02c.js": "8899b7759938ac9664af02333994bd2c0f49d454",
