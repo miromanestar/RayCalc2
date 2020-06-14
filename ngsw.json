@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591580756636,
+  "timestamp": 1592151076112,
   "index": "https://raycalc.com/index.html",
   "assetGroups": [
     {
@@ -468,7 +468,7 @@
     "https://raycalc.com/assets/ssdFormulaCalc.svg": "d46c562209a73e4181c6360d1c9aa6ae0b39c795",
     "https://raycalc.com/common-es2015.8692317c29a96ee81ec3.js": "42125fabdfebd478a5bd4dda8a21605adcec0f54",
     "https://raycalc.com/common-es5.8692317c29a96ee81ec3.js": "f442960308bf99b55ffb0dc0815ef6c0fb1f005b",
-    "https://raycalc.com/index.html": "8de7616d4961b5f626206fdba9fbfcf5581ecd88",
+    "https://raycalc.com/index.html": "769a74690f4bd6cb30777078c7d11934fc54241b",
     "https://raycalc.com/main-es2015.e6cb074994d8b3ec1a79.js": "5090514c3e898e7d00192a130bb5b168a230c2bb",
     "https://raycalc.com/main-es5.e6cb074994d8b3ec1a79.js": "ad5153d154c6eaab404f1f3527aa3a9107f39834",
     "https://raycalc.com/polyfills-es2015.d82294eab3776add2aea.js": "3e8e13c20d952ed086f1eec54c0d0bf7cdb34142",
