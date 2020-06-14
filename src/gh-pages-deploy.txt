@@ -1,4 +1,4 @@
 ionic build --prod -- --base-href https://raycalc.com
-npx angular-cli-ghpages --dir=www
+npx angular-cli-ghpages --cname=raycalc.com --dir=www
 
 https://stackoverflow.com/questions/53036381/how-to-deploy-ionic-4-app-to-github-pages
