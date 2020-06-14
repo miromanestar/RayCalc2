@@ -281,3 +281,8 @@ body.dark-theme {
     --dataview-table-odd: #1e2023;
 
 }
+
+//Because on page transitions on iOS, the transition seems to run twice
+ion-toolbar.in-toolbar ion-buttons, ion-toolbar.in-toolbar ion-title {
+    transition: none !important;
+}

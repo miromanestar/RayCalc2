@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
       scrollPadding: false,
       scrollAssist: false,
       swipeBackEnabled: false, //CHANGE TO TRUE FOR iOS BUILDS, FALSE FOR WEB BUILDS
+      mode: 'ios'
     }),
     AppRoutingModule, SettingsPageModule, ResultsPageModule, IonicStorageModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
