@@ -82,14 +82,15 @@ export class StorageService {
   deleteHistoryItem(id: Date): Promise<History> {
     return this.storage.get(HIST_KEY).then((historys: History[]) => {
       if(!historys || historys.length === 0) { return null; }
-
+      console.log("test")
       let toKeep: History[] = [];
       for(let i of historys) {
-        if(i.id != id) {
+        if (i.id.toString() !== id.toString()) {
+          console.log(i.id == id)
           toKeep.unshift(i);
         }
       }
-      return this.storage.set(HIST_KEY, toKeep);
+      return this.storage.set(HIST_KEY, toKeep.reverse());
     });
   }
   

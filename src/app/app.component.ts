@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Platform, Config } from '@ionic/angular';
+import { Platform, Config, IonicModule } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Plugins, StatusBarStyle, KeyboardInfo, KeyboardResize } from '@capacitor/core';
 import { ThemeService } from './services/theme.service';
@@ -68,17 +68,10 @@ export class AppComponent implements OnInit {
       prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
       StatusBar.show();
       this.splashScreen.hide();
-
-      /*
-      window.addEventListener("keyboardWillShow", function (evt) {
-        $(".keyboard-spacer").height(evt.keyboardHeight * .9);
-        $(".keyboard-spacer").show();
-      });
-
-      window.addEventListener("keyboardWillHide", function (evt) {
-        $(".keyboard-spacer").height(0);
-        $(".keyboard-spacer").hide();
-      });*/
+      
+      if (this.platform.is('hybrid')) { 
+        this.config.set('swipeBackEnabled', 'true');
+      }
 
       Keyboard.setAccessoryBarVisible({ isVisible: true });
       //Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });

@@ -4,7 +4,7 @@ import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { StorageService } from '../services/storage.service';
 import { isNumber } from 'util';
-import { Plugins, KeyboardInfo, HapticsImpactStyle } from '@capacitor/core';
+import { Plugins, KeyboardInfo } from '@capacitor/core';
 import { IonContent } from '@ionic/angular'
 import { ViewChild, AfterViewInit } from '@angular/core';
 
@@ -53,6 +53,7 @@ export class InputPagePage {
 
   //Enable/disable SSD
   disableSSD = "false";
+  disableField = "false";
 
   constructor(public router : Router, private pickerCtrl : PickerController, private storageService: StorageService) { 
     const navigation = this.router.getCurrentNavigation();
@@ -102,7 +103,8 @@ export class InputPagePage {
     if(calcSelect == 'ssd') { 
       this.WhichSelected = 'SSD Calculation'; 
       this.fieldSelect = 'Single';  
-      this.disableSSD = "true"; 
+      this.disableSSD = "true";
+      this.disableField = "true";
 
       this.storageService.getISO().then(iso => {
         if(iso != "" && isNumber(iso)) { this.ssd= iso; } else {this.ssd = "100" }
@@ -113,6 +115,7 @@ export class InputPagePage {
   }
   
   //Picker selection, takes string input to determine which values to display
+  /*
   async openPicker(selection: string) {
     if(this.calcSelect == "sad" || selection == 'energy') {
       var opts: PickerOptions = { columns: [] };
@@ -133,7 +136,6 @@ export class InputPagePage {
       let picker = await this.pickerCtrl.create(opts);
       picker.present()
       picker.onDidDismiss().then(async data => {
-      this.hapticsSelectionChanged()  
       let col = await picker.getColumn('select');
       if(col.options[col.selectedIndex].text != "Select an option" && col.options[col.selectedIndex].value != "15" && col.options[col.selectedIndex].value != "10") { //Disable 15MV energy level due to lack of data
         if (selection == "field") { this.fieldSelect = col.options[col.selectedIndex].value; } else
@@ -141,11 +143,7 @@ export class InputPagePage {
       }
       });
     }
-  }
-
-  hapticsSelectionChanged() {
-    Haptics.selectionChanged();
-  }
+  } */
 
   changeISO(selection: string) {
     if(this.calcSelect == "sad") {

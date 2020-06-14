@@ -34,7 +34,10 @@
             <ion-col style="padding-right: 0px;">
                 <ion-item>
                     <ion-label position="stacked" class="input-label">Field Setup</ion-label>
-                    <ion-input [ngStyle]="fieldStyle" [(ngModel)]="fieldSelect" (ionFocus)="resetInputs('field')" readonly="true" placeholder="Single/Opposed" inputmode="none" required="true" (click)="openPicker('field')"></ion-input>
+                    <ion-select interface="popover" [ngStyle]="fieldStyle" [(ngModel)]="fieldSelect" (ionFocus)="resetInputs('field')" disabled="{{ disableField }}" placeholder="Single/Opposed" inputmode="none" required="true">
+                        <ion-select-option value="Single">Single</ion-select-option>
+                        <ion-select-option value="Opposed">Opposed</ion-select-option>
+                    </ion-select>
                 </ion-item>
             </ion-col>
         </ion-row>
@@ -58,7 +61,10 @@
             <ion-col>
                 <ion-item style="padding-right: 0px;">
                     <ion-label position="stacked" class="input-label">Energy (MV)</ion-label>
-                    <ion-input [ngStyle]="energyStyle" [(ngModel)]="energySelect" (ionFocus)="resetInputs('energy')" placeholder="Energy Level" inputmode="none" required="true" readonly="true" (click)="openPicker('energy')"></ion-input>
+                    <ion-select interface="popover" [ngStyle]="energyStyle" [(ngModel)]="energySelect" (ionFocus)="resetInputs('energy')" placeholder="Energy Level" inputmode="none" required="true" readonly="true">
+                        <ion-select-option value=6>6MV</ion-select-option>
+                        <ion-select-option value=18>18MV</ion-select-option>
+                    </ion-select>
                 </ion-item>
             </ion-col>
         </ion-row>
