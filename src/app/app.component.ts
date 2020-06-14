@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
       }
 
       Keyboard.setAccessoryBarVisible({ isVisible: true });
-      //Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
+      Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
       Keyboard.setScroll({ isDisabled: false });
     });
   }
