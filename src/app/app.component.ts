@@ -69,8 +69,18 @@ export class AppComponent implements OnInit {
       StatusBar.show();
       this.splashScreen.hide();
 
+      window.addEventListener("keyboardWillShow", function (evt) {
+        $(".keyboard-spacer").height(evt.keyboardHeight * .9);
+        $(".keyboard-spacer").show();
+      });
+
+      window.addEventListener("keyboardWillHide", function (evt) {
+        $(".keyboard-spacer").height(0);
+        $(".keyboard-spacer").hide();
+      });
+
       Keyboard.setAccessoryBarVisible({ isVisible: true });
-      Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
+      //Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
       Keyboard.setScroll({ isDisabled: false });
     });
   }
