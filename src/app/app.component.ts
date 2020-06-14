@@ -1,5 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Platform, Config } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Plugins, StatusBarStyle, KeyboardInfo, KeyboardResize } from '@capacitor/core';
 import { ThemeService } from './services/theme.service';
@@ -16,12 +16,13 @@ declare var $: any;
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private storageService: StorageService,
     private theme: ThemeService,
+    private config: Config
 
   ) {
     this.themeControl(false);
@@ -68,10 +69,24 @@ export class AppComponent implements AfterViewInit {
       StatusBar.show();
       this.splashScreen.hide();
 
+      window.addEventListener("keyboardWillShow", function (evt) {
+        $(".keyboard-spacer").height(evt.keyboardHeight * .9);
+        $(".keyboard-spacer").show();
+      });
+
+      window.addEventListener("keyboardWillHide", function (evt) {
+        $(".keyboard-spacer").height(0);
+        $(".keyboard-spacer").hide();
+      });
+
       Keyboard.setAccessoryBarVisible({ isVisible: true });
-      Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
+      //Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
       Keyboard.setScroll({ isDisabled: false });
     });
+  }
+
+  ngOnInit() {
+      //this.config.set('animated', false);
   }
 
   ngAfterViewInit() {}
