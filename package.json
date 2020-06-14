@@ -22,13 +22,9 @@
         "@angular/platform-browser-dynamic": "~8.1.2",
         "@angular/pwa": "^0.901.7",
         "@angular/router": "~8.1.2",
-<<<<<<< HEAD
-        "@capacitor/android": "^1.5.2",
-=======
         "@angular/service-worker": "~8.1.2",
         "@babel/compat-data": "^7.8.0",
         "@capacitor/android": "^1.5.0",
->>>>>>> 228bce4a97e016dd4745314783dc1dbb1c92d9ca
         "@capacitor/core": "1.5.0",
         "@capacitor/ios": "^1.5.2",
         "@ionic-native/core": "^5.26.0",

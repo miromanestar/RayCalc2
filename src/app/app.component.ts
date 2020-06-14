@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
         if(theme == 'light') { this.enableLight() }
         if(theme == 'dark') { this.enableDark() }
       }
-    })
+    });
   }
 
   enableDark() {
@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
       StatusBar.show();
       this.splashScreen.hide();
 
+      /*
       window.addEventListener("keyboardWillShow", function (evt) {
         $(".keyboard-spacer").height(evt.keyboardHeight * .9);
         $(".keyboard-spacer").show();
@@ -77,7 +78,7 @@ export class AppComponent implements OnInit {
       window.addEventListener("keyboardWillHide", function (evt) {
         $(".keyboard-spacer").height(0);
         $(".keyboard-spacer").hide();
-      });
+      });*/
 
       Keyboard.setAccessoryBarVisible({ isVisible: true });
       //Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
