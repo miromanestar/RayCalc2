@@ -1,14 +1,11 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Platform, Config, IonicModule } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { Plugins, StatusBarStyle, KeyboardInfo, KeyboardResize } from '@capacitor/core';
+import { Component, OnInit } from '@angular/core';
+import { Platform, Config } from '@ionic/angular';
+import { Plugins, StatusBarStyle, KeyboardResize } from '@capacitor/core';
 import { ThemeService } from './services/theme.service';
 import { StorageService } from './services/storage.service';
 
 
-
-const { StatusBar } = Plugins;
-const { Keyboard } = Plugins;
+const { StatusBar, SplashScreen, Keyboard } = Plugins;
  
 declare var $: any;
 @Component({
@@ -19,10 +16,9 @@ declare var $: any;
 export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
     private storageService: StorageService,
     private theme: ThemeService,
-    private config: Config
+    private config: Config,
 
   ) {
     this.themeControl(false);
@@ -64,13 +60,14 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
+
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       prefersDark.addListener((mediaQuery) => this.themeControl(mediaQuery.matches));
       StatusBar.show();
-      this.splashScreen.hide();
+      SplashScreen.hide();
       
       if (this.platform.is('hybrid')) { 
-        this.config.set('swipeBackEnabled', 'true');
+        this.config.set('swipeBackEnabled', true);
       }
 
       Keyboard.setAccessoryBarVisible({ isVisible: true });
@@ -80,7 +77,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-      //this.config.set('animated', false);
   }
 
   ngAfterViewInit() {}
