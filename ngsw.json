@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1592173074394,
+  "timestamp": 1592179690867,
   "index": "https://raycalc.com/index.html",
   "assetGroups": [
     {
@@ -24,8 +24,8 @@
         "https://raycalc.com/106-es5.e06281d74206ff509c30.js",
         "https://raycalc.com/107-es2015.a022c820912ce44af9f4.js",
         "https://raycalc.com/107-es5.a022c820912ce44af9f4.js",
-        "https://raycalc.com/14-es2015.6a420620af6e6ceeaf8f.js",
-        "https://raycalc.com/14-es5.6a420620af6e6ceeaf8f.js",
+        "https://raycalc.com/14-es2015.b895ad87269ae503c180.js",
+        "https://raycalc.com/14-es5.b895ad87269ae503c180.js",
         "https://raycalc.com/15-es2015.5b1c910122ab222f993e.js",
         "https://raycalc.com/15-es5.5b1c910122ab222f993e.js",
         "https://raycalc.com/16-es2015.154505b682d207147597.js",
@@ -215,13 +215,13 @@
         "https://raycalc.com/common-es2015.8692317c29a96ee81ec3.js",
         "https://raycalc.com/common-es5.8692317c29a96ee81ec3.js",
         "https://raycalc.com/index.html",
-        "https://raycalc.com/main-es2015.80af86238997d91de592.js",
-        "https://raycalc.com/main-es5.80af86238997d91de592.js",
+        "https://raycalc.com/main-es2015.67dd2a795cda72173c8f.js",
+        "https://raycalc.com/main-es5.67dd2a795cda72173c8f.js",
         "https://raycalc.com/polyfills-es2015.d82294eab3776add2aea.js",
         "https://raycalc.com/polyfills-es5.c9cfaeca02f50c170842.js",
-        "https://raycalc.com/runtime-es2015.d0eae5f90225cbd46517.js",
-        "https://raycalc.com/runtime-es5.d0eae5f90225cbd46517.js",
-        "https://raycalc.com/styles.2dcc77d184e22842216e.css"
+        "https://raycalc.com/runtime-es2015.1dd8cf4b181a4541524c.js",
+        "https://raycalc.com/runtime-es5.1dd8cf4b181a4541524c.js",
+        "https://raycalc.com/styles.755411321c6d764d8277.css"
       ],
       "patterns": []
     },
@@ -265,8 +265,8 @@
     "https://raycalc.com/106-es5.e06281d74206ff509c30.js": "da316bbdd0709d130708e3c3bd7ada61ec3ee17f",
     "https://raycalc.com/107-es2015.a022c820912ce44af9f4.js": "1804f9bd9476741aa1bd5b2f901980c8ffc3afa2",
     "https://raycalc.com/107-es5.a022c820912ce44af9f4.js": "bd889f05d1b51b71dc348c340db89a29a20d67e8",
-    "https://raycalc.com/14-es2015.6a420620af6e6ceeaf8f.js": "f5e49ee828e10c2dc5cf5d1b9d8b914c48ccdb6b",
-    "https://raycalc.com/14-es5.6a420620af6e6ceeaf8f.js": "98bfe64ad0b403cdf753a920d4b160195376022c",
+    "https://raycalc.com/14-es2015.b895ad87269ae503c180.js": "a27ecc6ec73cabb043ef300175fda1f7eb7f4ecf",
+    "https://raycalc.com/14-es5.b895ad87269ae503c180.js": "9e3c525e71f91b6d23b04b984186a0c73985f0bf",
     "https://raycalc.com/15-es2015.5b1c910122ab222f993e.js": "a700c39543521fd9511bb0d7d76cf58ba082ebc0",
     "https://raycalc.com/15-es5.5b1c910122ab222f993e.js": "4281c4e1faad2ea40c57c0a442a9de2a8e4fb9a1",
     "https://raycalc.com/16-es2015.154505b682d207147597.js": "459c0c10be5d1240c86f8e4595bf6a8a4fe20514",
@@ -468,14 +468,14 @@
     "https://raycalc.com/assets/ssdFormulaCalc.svg": "d46c562209a73e4181c6360d1c9aa6ae0b39c795",
     "https://raycalc.com/common-es2015.8692317c29a96ee81ec3.js": "42125fabdfebd478a5bd4dda8a21605adcec0f54",
     "https://raycalc.com/common-es5.8692317c29a96ee81ec3.js": "f442960308bf99b55ffb0dc0815ef6c0fb1f005b",
-    "https://raycalc.com/index.html": "1ea0e6bd48ababa5cdb5733185ef6ec8b3910f93",
-    "https://raycalc.com/main-es2015.80af86238997d91de592.js": "f77a2aec114f71e6be0b77647df471ba90c55177",
-    "https://raycalc.com/main-es5.80af86238997d91de592.js": "e4de6219806453ddd8a19bcf1feba1adbcfa371f",
+    "https://raycalc.com/index.html": "b5fbc2964b101a22f1fdea25e7cf9d05bed82989",
+    "https://raycalc.com/main-es2015.67dd2a795cda72173c8f.js": "308708ff5147e9ed7726ec05fd00c09f3cfead50",
+    "https://raycalc.com/main-es5.67dd2a795cda72173c8f.js": "b236ae35bdcf439bb048d5d9e284af9a0bd09aa9",
     "https://raycalc.com/polyfills-es2015.d82294eab3776add2aea.js": "3e8e13c20d952ed086f1eec54c0d0bf7cdb34142",
     "https://raycalc.com/polyfills-es5.c9cfaeca02f50c170842.js": "5c75ae67dc62a233ab5a9d40cd7029b6513014b3",
-    "https://raycalc.com/runtime-es2015.d0eae5f90225cbd46517.js": "711c6e4eca3faf63719bdbb9f8e766bfcdcdfa9d",
-    "https://raycalc.com/runtime-es5.d0eae5f90225cbd46517.js": "c8d494000895059913ef51f7252d23faaebab857",
-    "https://raycalc.com/styles.2dcc77d184e22842216e.css": "d003d259d964934f71bbf4247fd05f94d50bc8eb"
+    "https://raycalc.com/runtime-es2015.1dd8cf4b181a4541524c.js": "abbbcef94d90872c5243854789b5bb9304c63b54",
+    "https://raycalc.com/runtime-es5.1dd8cf4b181a4541524c.js": "8a21deb37e0f0ffb988f70d1fefee5283b864e59",
+    "https://raycalc.com/styles.755411321c6d764d8277.css": "c251da3fcd4d06d45186d2cf9cc202bca1375433"
   },
   "navigationUrls": [
     {
